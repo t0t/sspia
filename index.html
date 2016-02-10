@@ -2,28 +2,94 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>SSPA</title>
+    <title>SSPIA</title>
     <!-- The CSS for the site. -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header>
+    <!-- <header>
       <nav id="navbar">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#blog">Blog</a>
         <a href="#contact">Contact</a>
       </nav>
-    </header>
+    </header> -->
 
     <!-- Dynamic content will be placed here by JavaScript. -->
-    <main id="mainContent"></main>
+    <main id="mainContent">
+      <div class="container">
+
+        <h2>SF Sergio Forés</h2>
+        <p>Cliente: laks dgjsfffkaf a</p>
+        <h2>Factura Nº <input type="text" value="001.13"></h2>
+        <label for="date">Fecha</label>
+        <input type="date" value="">
+        
+
+        <div class="tabla">
+
+          <div id="items" class="itemsDiv">
+            <div>hhh</div>
+            <div>
+
+              <select name="type">
+                <option value="service">Servicio</option>
+                <option value="product">Producto</option>
+                <option value="hour">Hora</option>
+                <option value="day">Día</option>
+              </select>
+
+              <input type="text" class="desc" name="description" value="" placeholder="product/service description herttde...">
+              <input type="number" class="precio" name="precio" step="0.01" value="15.00">
+              <input type="number" class="cantidad" name="cantidad" step="1" value="83">
+
+              <select name="impuesto" class="hayImpuestos" id="tx">
+                <option value="no">No</option>
+                <option value="si">IVA, IRPF</option>
+              </select>
+
+              <div class="base-imponible">0€</div>
+
+              <a href="#" class="delete">X</a>
+
+
+            </div>
+
+          </div>
+
+
+          <div class="invoice-totals">
+
+            <h3>Subtotals</h3>
+            <div id="invoiceSubtotal"></div>
+
+            <div class="impuesto-container">
+              <ul id="impuestos">
+                <li>Tasa Impuesdto</li>
+                <li>Valorffd</li>
+                <li>Cantidad a añadddir por impuestos</li>
+                <li id="invoiceTax"></li>
+              </ul>
+            </div>
+
+            <h3>Total Factura</h3>
+            <p id="invoiceTotal"></p>
+
+          </div>
+
+        </div>
+
+          <a href="" id="addItemButton">Añadir tarea +</a>
+      </div>
+    </main>
 
     <footer>Main footer</footer>
 
     <!-- The JavaScript build. -->
-    <script src="js/navigation.js"></script>
-    <script src="js/posts.js"></script>
-    <script src="js/pages.js"></script>
+    <!-- <script src="js/navigation.js"></script> -->
+    <script src="js/invoice.js"></script>
+    <!-- <script src="js/posts.js"></script> -->
+    <!-- <script src="js/pages.js"></script> -->
   </body>
 </html>
