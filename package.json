@@ -1,7 +1,7 @@
 {
-  "name": "Invoice App",
+  "name": "SSPIA",
   "version": "1.0.0",
-  "description": "http://t0t.github.io/invoiceapp/",
+  "description": "Static Single Page Invoice Application that uses only Web Standards",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,7 @@
   "author": "Sergio Fores",
   "repository": {
     "type": "git",
-    "url": "https://github.com/t0t/invoiceapp.git"
+    "url": "https://github.com/t0t/sspia.git"
   },
   "license": "ISC",
   "devDependencies": {
