@@ -1,0 +1,46 @@
+
+
+/* Use Google Fonts. */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding: 25px;
+}
+img {
+  width: 100%;
+}
+
+footer {
+  background-color: pink;
+  padding: 25px;
+}
+.post__name {
+  font-weight: bolder;
+  font-size: 120%;
+  margin: 10px 0;
+}
+.post__author {}
+.post__content {}
+
+#content {
+  padding: 25px 15px;
+  background-color: pink;
+}
+#navbar a {
+  font-size: 1.5em;
+  margin: 25px 0;
+  padding: 0px 8px 0px 8px;
+  color: black;
+  text-decoration: none;
+}
+
+/* Give the user an affordance that each link is clickable. */
+#navbar a:hover {
+  background-color: pink;
+}
+
+/* Style the active page link. */
+#navbar a.active{
+  background-color: pink;
+}
