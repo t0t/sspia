@@ -4,3 +4,7 @@ config.codekit
 .DS_Store
 sass/.sass-cache
 css/style.css.map
+
+clients.json
+*/clients.json
+data/clients.json

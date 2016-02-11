@@ -1,0 +1,69 @@
+[
+
+  {
+    "frontend": [
+      {
+        "client": "Maña Ind.",
+        "url": "http://mind.ag",
+        "logo": "img/logo.svg",
+        "work": "Front-End y creación de plantilla en Wordpress",
+        "description": "Proyecto gestionado en Trello",
+        "repository_url": "https://github.com/t0t/mind",
+        "features": [
+          "Maquetación Html5/Css3",
+          "Creación de theme en Wordpress",
+          "Sistema de iconos basado en Símbolos SVG",
+          "Entorno de desarrollo basado en Gulp y NPM"
+        ],
+        "images": {
+          "img_1": "img/img1.jpg",
+          "img_2": "img/img2.jpg",
+          "img_3": "img/img3.jpg"
+        },
+        "tags": [ "Wordpress", "Frontend", "Layout" ]
+      },
+      {
+        "client": "Energy Fruits",
+        "url": "http://energyfruits.com",
+        "logo": "img/logo.svg",
+        "work": "Front-End Sitio web basado en Wordpress",
+        "description": "Proyecto gestionado en Trello",
+        "repository_url": "https://github.com/t0t/energyfruits",
+        "features": [
+          "Maquetación Html5/Css3",
+          "Sass",
+          "Creación de theme en Wordpress",
+          "Sistema de iconos basado en Símbolos SVG",
+          "Entorno de desarrollo basado en Gulp y NPM"
+        ],
+        "images": {
+          "img_1": "img/img1.jpg",
+          "img_2": "img/img2.jpg",
+          "img_3": "img/img3.jpg"
+        },
+        "tags": [ "Wordpress", "Frontend", "Web Design" ]
+      }
+    ]
+  },
+  {
+    "graphic": [
+      {
+        "client": "Forés",
+        "url": "",
+        "logo": "img/logo.svg",
+        "work": "Catálogo Habit Design",
+        "description": "",
+        "features": [
+          "Maquetación en In Design"
+        ],
+        "images": {
+          "img_1": "img/img1.jpg",
+          "img_2": "img/img2.jpg",
+          "img_3": "img/img3.jpg"
+        },
+        "tags": [ "Layout", "Graphic" ]
+      }
+    ]
+  }
+
+]

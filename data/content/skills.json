@@ -1,0 +1,42 @@
+[
+
+	{
+		"workflow": [{
+				"javascript": [
+					"Manipulación DOM y BOM",
+					"AJAX, JSON",
+					"Eventos Javascript"
+				],
+				"html5": [
+					"Jade",
+					"html5"
+				],
+				"css": [
+					"Preprocesador Sass",
+					"Css3",
+					"Flexbox",
+					"medi@queries"
+				],
+				"wordpress": [
+					"Wordpress",
+					"Creación de themes",
+					"Advanced Custom Fields",
+					"API REST"
+				]
+			},
+			"SVG",
+			"Git",
+			"Editorial Layout"
+		],
+		"tools": [
+			"Atom",
+			"Sublime Text",
+			"Chrome Dev Tools",
+			"Mamp Pro",
+			"Sketch App",
+			"Scribus",
+			"InDesign"
+		]
+	}
+
+]

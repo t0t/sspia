@@ -1,0 +1,25 @@
+[
+
+  {
+    "id": "Número de factura",
+    "description": "Description tarea",
+    "currency": "€",
+    "date": "Fecha",
+    "client": "Nombre del cliente",
+    "task": "Tarea realizada",
+    "time": "Tiempo empleado",
+    "price": "Precio",
+    "taxes": "Impuestos",
+    "is_taxed": true,
+    "iva": "IVA",
+    "irpf": "IRPF",
+    "base_imp": "Base Imponible",
+    "total_tax": "Total Impuestos",
+    "total_invoice": "Total Factura",
+    "payment_types": "Medios de pago",
+    "paypal": "Paypal",
+    "bank_transfer": "Transferencia bancaria",
+    "discount": 0
+  }
+
+]

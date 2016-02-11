@@ -1,0 +1,38 @@
+[
+
+    {
+      "facebook": [
+        {
+          "name": "Facebook Sergio Forés",
+          "personal": "https://www.facebook.com/sergio.fores"
+        },
+        {
+          "name": "SF Studio",
+          "sf": "https://www.facebook.com/sergioforesstudio"
+        },
+        {
+          "name": "Tot",
+          "t0t": "https://www.facebook.com/T0T-156415467869146"
+        }
+      ],
+      "linkedin": "",
+      "tumblr": [
+        {
+          "name": "t0t Fotos",
+          "url": "https://www.tumblr.com/blog/t0tfotos"
+        },
+        {
+          "name": "t0t Inspire",
+          "url": "https://www.tumblr.com/blog/t0tinspire"
+        },
+        {
+          "name": "Portfolio",
+          "url": "https://www.tumblr.com/blog/sergiofores"
+        }
+      ],
+      "twitter": "https://twitter.com/t0tinspire",
+      "youtube": "https://www.youtube.com/user/sergeiforesraga",
+      "github": "https://github.com/t0t"
+    }
+
+]
