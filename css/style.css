@@ -24,7 +24,7 @@ select {
 
 .tabla {
   width: 100%;
-  background-color: green;
+  background-color: pink;
   padding: 5px; }
   .tabla input[type=text],
   .tabla input[type=number],

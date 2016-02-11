@@ -1,5 +1,6 @@
 node_modules
 config.codekit
 *.codekit
+.DS_Store
 sass/.sass-cache
 css/style.css.map

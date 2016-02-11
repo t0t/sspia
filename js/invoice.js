@@ -10,38 +10,27 @@ var Invoice = {
 
   uiEvent: function() {
 
-    $( '#items').on( 'click', '.delete', function( e ) {
+    var items = document.getElementById('items');
+    items.addEventListener('click', function( e ) {
       e.preventDefault();
-      $( this ).parent().parent().remove();
+      console.log('oooooo');
       Invoice.update();
     });
-    $( '#items' ).on( 'change', '.precio,.cantidad,.hayImpuestos', function( e ) {
-      Invoice.update();
-    });
-    $( '#addItemButton' ).on( 'click', function ( e ) {
-      e.preventDefault();
-      Invoice.addItem();
-      Invoice.update();
-    });
+
   },
 
   update: function () {
 
     var subtotal = 0,
         impuestosTotal = 0,
-        impuestos = {},
         total = 0;
 
     var itemsDiv = document.querySelectorAll('.itemsDiv');
     for (var i=0; i < itemsDiv.length; i++) {
-       var itemsRow = itemsDiv[i];
-    }
-
-    $( '#items > div' ).each( function () {
       // Toma el valor de .precio
-      var precio = parseFloat( $( '.precio', this ).val() );
+      var precio = document.querySelector('.precio');
       // Toma el valor de .cantidad
-      var cantidad = parseInt( $( '.cantidad', this ).val() );
+      var cantidad = document.querySelector('.cantidad');
       // Base imponible (sin impuestos)
       var baseImponible = precio * cantidad;
       // Toma el select .hayImpuestos
@@ -58,43 +47,34 @@ var Invoice = {
         var sumaTotal = juntaImpuestos + baseImponible;
         // Si hay impuestos entonces el subtotal añade la base imponible
         subtotal += sumaTotal;
+        console.log('xxxxx');
       } else {
         // Si no hay impuestos entonces el subtotal es el mismo que la base imponible
         subtotal += baseImponible;
-        $( '#impuestos' ).remove();
+        // $( '#impuestos' ).remove();
       }
-      // Pinta el precio del item con dos decimales
-      $( '.precio', this ).val( parseFloat( precio ).toFixed( 2 ) );
-      // Pinta Base imponible
-      $( '.base-imponible', this ).html( 'Base Imponible ' + baseImponible + Invoice.moneda );
-    });
+    }
 
 
     // Imprime el subtotal en el div invoiceSubtotal
-    $( '#invoiceSubtotal' ).html( parseFloat( subtotal ).toFixed( 2 ) +' '+ Invoice.moneda );
+    document.querySelector('#invoiceSubtotal');
     // Imprime el impuesto
-    $( '#invoiceTax' ).html( parseFloat( impuestosTotal ).toFixed( 2 ) +' '+ Invoice.moneda );
+    document.querySelector('#invoiceTax');
     // Imprime el Total de la FACTURA
     total = parseFloat( subtotal) + parseFloat( impuestosTotal );
-    $( '#invoiceTotal' ).html( parseFloat( total ).toFixed( 2 ) );
-        
+    document.querySelector('#invoiceTax');
+
     Invoice.showImpuesto();
     Invoice.displayDelete();
 
   },
 
   addItem: function () {
-    var html = 'Aqui añadiremos etiquetas html';
-    $( '#items' ).append( html );
+    // var html = 'Aqui añadiremos etiquetas html';
+    document.querySelector('#items');
   },
 
   displayDelete: function () {
-    var deleteCnt = $( '.delete' ).size();
-    if ( deleteCnt > 1 ) {
-      $( '.delete' ).show();
-    } else {
-      $( '.delete' ).hide();
-    }
   },
 
   showImpuesto: function () {
