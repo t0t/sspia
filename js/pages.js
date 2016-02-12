@@ -1,5 +1,6 @@
 // RENDER POSTS
 (function () {
+
   // Adds a DOM structure for each page.
   function renderPages( pages ) {
     // Create the DOM element that will contain the pages.

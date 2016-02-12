@@ -1,7 +1,17 @@
 # SSPIA
 Static Single Page Invoice Application that uses only Web Standards (HTML, JavaScript, CSS, [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)).
 
-This project does not use any libraries at all. This emphasizes the core technogies, and provides a foundation for understanding the fundamentals.
+# HTML+CSS+JS are my framework
+
+With newer standards like:
+
+- HTML Imports
+- Object.observe
+- Promises
+- HTML Templates
+
+I think it's time to rethink the model of JS frameworks. There's no need to invent yet another way to do something, just use HTML+CSS+JS. [source](http://bitworking.org/news/2014/05/zero_framework_manifesto)
+
 
 ## Background
 

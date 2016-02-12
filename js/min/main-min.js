@@ -1,0 +1,1 @@
+var app={},brandName=brand.name;alert(brandName);
