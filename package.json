@@ -1,0 +1,38 @@
+{
+  "name": "sspia",
+  "version": "1.0.0",
+  "description": "Static Single Page Invoice Application that uses only Web Standards (HTML, JavaScript, CSS, [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)).",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.9.1",
+    "del": "^2.0.1",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.0.0",
+    "gulp-data": "^1.2.0",
+    "gulp-gh-pages": "0.5.2",
+    "gulp-image": "^1.1.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "~1.5.1",
+    "gulp-swig": "^0.7.4",
+    "gulp-uglify": "~1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t0t/sspia.git"
+  },
+  "author": "Sergio Forés",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t0t/sspia/issues"
+  },
+  "homepage": "https://github.com/t0t/sspia#readme"
+}
