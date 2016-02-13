@@ -1,1 +1,0 @@
-function print_today(){function e(e){return 1e3>e?e+1900:e}var r=new Date,t=new Array("January","February","March","April","May","June","July","August","September","October","November","December"),n=(r.getDate()<10?"0":"")+r.getDate(),a=t[r.getMonth()]+" "+n+", "+e(r.getYear());return a}console.log(print_today());
