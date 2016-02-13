@@ -34,6 +34,7 @@ select {
 
 #items .desc {
   min-width: 50px; }
+
 #items .total-precio {
   font-weight: 700;
   background-color: pink; }
@@ -44,4 +45,4 @@ select {
 #impuestos {
   width: 100%; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=main.css.map */
