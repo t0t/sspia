@@ -7,11 +7,16 @@ function getJSON(url, callback) {
   xhr.send();
 }
 
-export function getUsefulContents(url, callback) {
-  getJSON(url, data => callback(JSON.parse(data)));
+function getUsefulContents(url, callback) {
+  getJSON(url, site => callback(JSON.parse(site)));
 }
 
 
-// getUsefulContents("data/views/site.json", data => {
-//   console.log(data.description);
-// });
+getUsefulContents("data/views/site.json", site => {
+  console.log(site);
+  // var site = data;
+  console.log(site[0].description);
+  console.log(site[0].name);
+  console.log(site[0].url);
+
+});

@@ -26,10 +26,6 @@ console.log(x);
 // });
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getUsefulContents = getUsefulContents;
 function getJSON(url, callback) {
   var xhr = new XMLHttpRequest();
   xhr.onload = function () {
@@ -40,14 +36,18 @@ function getJSON(url, callback) {
 }
 
 function getUsefulContents(url, callback) {
-  getJSON(url, function (data) {
-    return callback(JSON.parse(data));
+  getJSON(url, function (site) {
+    return callback(JSON.parse(site));
   });
 }
 
-// getUsefulContents("data/views/site.json", data => {
-//   console.log(data.description);
-// });
+getUsefulContents("data/views/site.json", function (site) {
+  console.log(site);
+  // var site = data;
+  console.log(site[0].description);
+  console.log(site[0].name);
+  console.log(site[0].url);
+});
 
 // Imprime el dia en que estamos
 // export function printToday() {
