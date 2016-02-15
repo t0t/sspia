@@ -1,34 +1,17 @@
-
-var READY_STATE_COMPLETE=4;
-var peticion_http;
-
-function inicializa_xhr() {
-  if(window.XMLHttpRequest) {
-    return new XMLHttpRequest();
-  }
+function getJSON(url, callback) {
+  let xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    callback(this.responseText)
+  };
+  xhr.open("GET", url, true);
+  xhr.send();
 }
 
-function cargaContenido(url, metodo, funcion) {
-  peticion_http = inicializa_xhr();
-
-  if(peticion_http) {
-    peticion_http.onreadystatechange = funcion;
-    peticion_http.open(metodo, url, true);
-    peticion_http.send(null);
-  }
+export function getUsefulContents(url, callback) {
+  getJSON(url, data => callback(JSON.parse(data)));
 }
 
-function muestraContenido() {
-  if(peticion_http.readyState === READY_STATE_COMPLETE) {
-    if(peticion_http.status === 200) {
-      var brand = JSON.parse( peticion_http.responseText);
-      console.log(brand);
-    }
-  }
-}
 
-function descargaJson() {
-  cargaContenido("data/views/site.json", "GET", muestraContenido);
-}
-
-window.onload = descargaJson;
+// getUsefulContents("data/views/site.json", data => {
+//   console.log(data.description);
+// });

@@ -17,14 +17,14 @@ var concat          =     require("gulp-concat");
   Compile Sass
 */
 gulp.task( 'css', function () {
-  gulp.src( './dev/sass/main.scss' )
+  gulp.src( './dev/sass/*.scss' )
     .pipe( sourcemaps.init() )
     .pipe( sass() )
     .pipe( autoprefixer({
         browsers: [ 'last 2 versions' ],
         cascade: false
     }))
-    .pipe( sourcemaps.write( '.' ) )
+    .pipe( sourcemaps.write( './' ) )
     .pipe( gulp.dest( './dev/css' ) )
 });
 /*
@@ -38,7 +38,7 @@ gulp.task( 'img', function () {
   Watch
 */
 gulp.task('watch', function () {
-  gulp.watch([ './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'sass' ]);
+  gulp.watch([ './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'css' ]);
   gulp.watch([ './dev/js/build.js', './dev/js/**/*' ], [ 'js' ]);
   // gulp.watch([ './views/*.jade', './views/**/*.jade' ], [ 'jade' ]);
 });

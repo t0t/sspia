@@ -1,22 +1,25 @@
 
-// Funcion anónima para no contaminar el proyecto
-let app = {};
+// Importa el componente invoice
+// import { funcion1, funcion2 } from "components/xhr.js";
+// import { xx, cc } from "components/invoice.js";
+// import { ss, funcionv } from "components/navigation.js";
 
-app = function () {
+// let irpf = 15;
+// let iva = 21;
+// let baseImp = 0;
+// let total = 0;
+// let output = `Impuesto: ${ (irpf * 15) / 100 }`;
+//
+// console.log(output);
 
-  var brand = {};
-}();
+// Importar Componente invoice
+// import printToday('components/invoice.js');
+// printToday();
 
-var c = 4;
-console.log(c);
-
-var myModule = function () {
-  var module;
-
-  module.varProperty = "This is a property on myModule";
-  module.funcProperty = function () {
-    //insert code here
-  };
-
-  return module;
-}();
+let x = 3
+console.log(x);
+// Importar Modulo XHR
+// import { getUsefulContents } from "xhr.js";
+// getUsefulContents("data/views/site.json", data => {
+//   console.log(data.description);
+// });
