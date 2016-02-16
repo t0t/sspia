@@ -3,8 +3,9 @@
 * { box-sizing: border-box; }
 body {
   font-family: 'Source Sans Pro';
-  font-size: 15px;
+  font-size: 20px;
   padding: $padding-base;
+  background-color: $color-base;
 }
 .container {
   width: 100%;

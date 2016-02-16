@@ -1,5 +1,9 @@
-"use strict";
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+'use strict';
 
+var _invoice = require('./components/invoice');
+
+console.log((0, _invoice.sumTwo)(1000, 90));
 // Importa el componente invoice
 // import { funcion1, funcion2 } from "components/xhr.js";
 // import { xx, cc } from "components/invoice.js";
@@ -11,42 +15,34 @@
 // let total = 0;
 // let output = `Impuesto: ${ (irpf * 15) / 100 }`;
 //
-// console.log(output);
+// function sumTwo(a, b) {
+//   return a + b;
+// }
+//
+
+console.log('ssjsssdddddds');
 
 // Importar Componente invoice
 // import printToday('components/invoice.js');
 // printToday();
 
-var x = 3;
-console.log(x);
+// var _invoice = require('./components/invoice.js');
+//
+// import { _invoice.another } from 'invoice.js';
+//
+// console.log(_invoice.another);
+
 // Importar Modulo XHR
 // import { getUsefulContents } from "xhr.js";
 // getUsefulContents("data/views/site.json", data => {
 //   console.log(data.description);
 // });
+
+},{"./components/invoice":2}],2:[function(require,module,exports){
 "use strict";
 
-function getJSON(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    callback(this.responseText);
-  };
-  xhr.open("GET", url, true);
-  xhr.send();
-}
-
-function getUsefulContents(url, callback) {
-  getJSON(url, function (site) {
-    return callback(JSON.parse(site));
-  });
-}
-
-getUsefulContents("data/views/site.json", function (site) {
-  console.log(site);
-  // var site = data;
-  console.log(site[0].description);
-  console.log(site[0].name);
-  console.log(site[0].url);
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 
 // Imprime el dia en que estamos
@@ -61,6 +57,16 @@ getUsefulContents("data/views/site.json", function (site) {
 //   return today;
 // }
 // console.log( printToday() );
+
+function sumTwo(a, b) {
+  return a + b;
+}
+
+exports.sumTwo = sumTwo;
+
+// module.exports = function (name, greeting = 'Hola') {
+//   console.log(`$(greeting) $(name)`);
+// };
 
 // var Invoice = {
 //
@@ -151,5 +157,5 @@ getUsefulContents("data/views/site.json", function (site) {
 //
 // // launch
 // Invoice.init();
-"use strict";
-//# sourceMappingURL=build.js.map
+
+},{}]},{},[1]);

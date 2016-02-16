@@ -12,9 +12,16 @@
 // }
 // console.log( printToday() );
 
+function sumTwo(a, b) {
+  return a + b;
+}
+
+export { sumTwo };
 
 
-
+// module.exports = function (name, greeting = 'Hola') {
+//   console.log(`$(greeting) $(name)`);
+// };
 
 
 

@@ -10,14 +10,29 @@
 // let total = 0;
 // let output = `Impuesto: ${ (irpf * 15) / 100 }`;
 //
-// console.log(output);
+// function sumTwo(a, b) {
+//   return a + b;
+// }
+//
+import { sumTwo } from './components/invoice';
+console.log( sumTwo(1000, 90));
+
+console.log( 'ssjsssdddddds');
 
 // Importar Componente invoice
 // import printToday('components/invoice.js');
 // printToday();
 
-let x = 3
-console.log(x);
+// var _invoice = require('./components/invoice.js');
+//
+// import { _invoice.another } from 'invoice.js';
+//
+// console.log(_invoice.another);
+
+
+
+
+
 // Importar Modulo XHR
 // import { getUsefulContents } from "xhr.js";
 // getUsefulContents("data/views/site.json", data => {

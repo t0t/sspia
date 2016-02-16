@@ -1,17 +1,24 @@
 var gulp            =     require('gulp');
 // var img          =     require('gulp-image');
+// var babel           =     require("gulp-babel");
 var sourcemaps      =     require("gulp-sourcemaps");
-var babel           =     require("gulp-babel");
-var browserSync     =     require('browser-sync').create();
 var uglify          =     require('gulp-uglify');
 var htmlmin         =     require('gulp-htmlmin');
 var autoprefixer    =     require('gulp-autoprefixer');
 var ghPages         =     require('gulp-gh-pages');
 var cssnano         =     require('gulp-cssnano');
+
+var gutil           =     require('gulp-util');
+var source          =     require('vinyl-source-stream');
+var browserify      =     require('browserify');
+var watchify        =     require('watchify');
+var babelify        =     require('babelify');
+var browserSync     =     require('browser-sync').create();
+
 // var del             =     require('del');
 // var data            =     require('gulp-data');
 var sass            =     require('gulp-sass');
-var concat          =     require("gulp-concat");
+// var concat          =     require("gulp-concat");
 
 /*
   Compile Sass
@@ -34,33 +41,23 @@ gulp.task( 'img', function () {
   gulp.src( './dev/img/*.jpg' )
     .pipe( gulp.dest( './prod/img' ) )
 });
-/*
-  Watch
-*/
-gulp.task('watch', function () {
-  gulp.watch([ './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'css' ]);
-  gulp.watch([ './dev/js/build.js', './dev/js/**/*' ], [ 'js' ]);
-  // gulp.watch([ './views/*.jade', './views/**/*.jade' ], [ 'jade' ]);
-});
+
 /*
   Development
 */
-gulp.task( 'dev', [ 'watch' ], function () {
-  browserSync.init([
-    './dev/css/main.css',
-    './dev/js/build.js',
-    './dev/*.html'
-    // './dist/**/*.html'
-  ], {
-    server: { baseDir: './dev' }
-    //proxy: '',
-    //host: 'localhost:3000'
-  });
-});
-/*
-  Build
-*/
-gulp.task('build', [ 'css', 'js', 'html' ]);
+// gulp.task( 'dev', [ 'watch' ], function () {
+//   browserSync.init([
+//     './dev/css/main.css',
+//     './dev/js/build.js',
+//     './dev/*.html'
+//     // './dist/**/*.html'
+//   ], {
+//     server: { baseDir: './dev' }
+//     //proxy: '',
+//     //host: 'localhost:3000'
+//   });
+// });
+
 /*
   html
 */
@@ -69,19 +66,43 @@ gulp.task( 'html', function() {
     .pipe( htmlmin({collapseWhitespace: true}))
     .pipe( gulp.dest( 'prod' ))
 });
+
+// bundle
+function bundle (bundler) {
+  return bundler
+    .transform(babelify, {presets: ['es2015']})
+    .bundle()
+    .on('error', function (e) {
+      gutil.log(e.message);
+    })
+    .pipe(source('build.js'))
+    .pipe( gulp.dest( "./dev/js/" ) )
+    .pipe( browserSync.stream());
+}
+
 /*
   JS
 */
 gulp.task( "js", function () {
-  return gulp.src( "dev/js/src/**/*.js" )
-    .pipe( sourcemaps.init() )
-    .pipe( babel( {
-      presets: [ 'es2015' ]
-    }))
-  .pipe( concat( "build.js" ) )
-  .pipe( sourcemaps.write( "." ) )
-  .pipe( gulp.dest( "dev/js/" ) );
+  return bundle(browserify('dev/js/src/app.js'));
+  // return browserify( "dev/js/src/app.js" )
+  //   .bundle()
+  //   .on('error', function (e) {
+  //     gutil.log(e);
+  //   })
+  // .pipe( source( 'build.js' ) )
+  // .pipe( gulp.dest( "dev/js/" ) );
 });
+// gulp.task( "js", function () {
+//   return gulp.src( "dev/js/src/**/*.js" )
+//     .pipe( sourcemaps.init() )
+//     .pipe( babel( {
+//       presets: [ 'es2015' ]
+//     }))
+//   .pipe( concat( "build.js" ) )
+//   .pipe( sourcemaps.write( "." ) )
+//   .pipe( gulp.dest( "dev/js/" ) );
+// });
 /*
   Compress Js
 */
@@ -110,6 +131,29 @@ gulp.task( 'minicss', function() {
 //     'assets/js/build.js*'
 //   ]);
 // });
+/*
+  Watch
+*/
+gulp.task('watch', function () {
+  gulp.watch([ './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'css' ]);
+
+  var watcher = watchify( browserify( './dev/js/src/app.js', watchify.args ));
+  bundle(watcher);
+  watcher.on('update', function () {
+    bundle(watcher);
+  });
+  watcher.on('log', gutil.log);
+  browserSync.init({
+    server: './dev',
+    logFileChanges: false
+  });
+  // gulp.watch([ './dev/js/build.js', './dev/js/**/*' ], [ 'js' ]);
+  // gulp.watch([ './views/*.jade', './views/**/*.jade' ], [ 'jade' ]);
+});
+/*
+  Build
+*/
+gulp.task('build', [ 'css', 'js', 'html' ]);
 /*
   Deploy to Github
 */

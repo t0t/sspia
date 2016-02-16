@@ -5,7 +5,8 @@
 body {
   font-family: 'Source Sans Pro';
   font-size: 15px;
-  padding: 25px; }
+  padding: 5px;
+  background-color: pink; }
 
 .container {
   width: 100%;
