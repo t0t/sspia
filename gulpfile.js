@@ -5,8 +5,8 @@ var sourcemaps      =     require("gulp-sourcemaps");
 var uglify          =     require('gulp-uglify');
 var htmlmin         =     require('gulp-htmlmin');
 var autoprefixer    =     require('gulp-autoprefixer');
-var ghPages         =     require('gulp-gh-pages');
 var cssnano         =     require('gulp-cssnano');
+var sass            =     require('gulp-sass');
 
 var gutil           =     require('gulp-util');
 var source          =     require('vinyl-source-stream');
@@ -15,9 +15,9 @@ var watchify        =     require('watchify');
 var babelify        =     require('babelify');
 var browserSync     =     require('browser-sync').create();
 
+var ghPages         =     require('gulp-gh-pages');
 // var del             =     require('del');
 // var data            =     require('gulp-data');
-var sass            =     require('gulp-sass');
 // var concat          =     require("gulp-concat");
 
 /*

@@ -1,29 +1,30 @@
 
 // Imprime el dia en que estamos
-// export function printToday() {
-//   var now = new Date();
-//   var months = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
-//   var date = ((now.getDate()<10) ? "0" : "")+ now.getDate();
-//   function fourdigits(number) {
-//     return (number < 1000) ? number + 1900 : number;
-//   }
-//   var today =  months[now.getMonth()] + " " + date + ", " + (fourdigits(now.getYear()));
-//   return today;
-// }
-// console.log( printToday() );
-
-function sumTwo(a, b) {
-  return a + b;
+export function printToday() {
+  var now = new Date();
+  var months = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
+  var date = ((now.getDate()<10) ? "0" : "")+ now.getDate();
+  function fourdigits(number) {
+    return (number < 1000) ? number + 1900 : number;
+  }
+  var today =  months[now.getMonth()] + " " + date + ", " + (fourdigits(now.getYear()));
+  return today;
 }
-
-export { sumTwo };
-
-
-// module.exports = function (name, greeting = 'Hola') {
-//   console.log(`$(greeting) $(name)`);
-// };
+console.log( printToday() );
 
 
+
+// let irpf = 15;
+// let iva = 21;
+// let baseImp = 0;
+// let total = 0;
+// let output = `Impuesto: ${ (irpf * 15) / 100 }`;
+
+
+
+export function sumTwo(a, b, c) {
+  return a + b + c;
+}
 
 
 

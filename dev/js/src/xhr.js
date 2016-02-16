@@ -7,16 +7,15 @@ function getJSON(url, callback) {
   xhr.send();
 }
 
-function getUsefulContents(url, callback) {
+export function renderSiteInfo(url, callback) {
   getJSON(url, site => callback(JSON.parse(site)));
 }
 
-
-getUsefulContents("data/views/site.json", site => {
-  console.log(site);
-  // var site = data;
-  console.log(site[0].description);
-  console.log(site[0].name);
-  console.log(site[0].url);
-
-});
+// var xhr = new XMLHttpRequest();
+// xhr.open('GET', '/user/1', true);
+// xhr.onreadystatechange = function () {
+//   if (this.readyState === 4) {
+//     var user = JSON.parse(xhr.responseText);
+//   }
+// };
+// xhr.send();
