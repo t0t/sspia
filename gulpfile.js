@@ -23,8 +23,8 @@ var ghPages         =     require('gulp-gh-pages');
 /*
   Compile Sass
 */
-gulp.task( 'css', function () {
-  gulp.src( './dev/sass/*.scss' )
+gulp.task( 'sass', function () {
+  gulp.src( './dev/sass/**/*.scss' )
     .pipe( sourcemaps.init() )
     .pipe( sass() )
     .pipe( autoprefixer({
@@ -34,6 +34,7 @@ gulp.task( 'css', function () {
     .pipe( sourcemaps.write( './' ) )
     .pipe( gulp.dest( './dev/css' ) )
 });
+
 /*
   Images
 */
@@ -41,22 +42,6 @@ gulp.task( 'img', function () {
   gulp.src( './dev/img/*.jpg' )
     .pipe( gulp.dest( './prod/img' ) )
 });
-
-/*
-  Development
-*/
-// gulp.task( 'dev', [ 'watch' ], function () {
-//   browserSync.init([
-//     './dev/css/main.css',
-//     './dev/js/build.js',
-//     './dev/*.html'
-//     // './dist/**/*.html'
-//   ], {
-//     server: { baseDir: './dev' }
-//     //proxy: '',
-//     //host: 'localhost:3000'
-//   });
-// });
 
 /*
   html
@@ -85,24 +70,8 @@ function bundle (bundler) {
 */
 gulp.task( "js", function () {
   return bundle(browserify('dev/js/src/app.js'));
-  // return browserify( "dev/js/src/app.js" )
-  //   .bundle()
-  //   .on('error', function (e) {
-  //     gutil.log(e);
-  //   })
-  // .pipe( source( 'build.js' ) )
-  // .pipe( gulp.dest( "dev/js/" ) );
 });
-// gulp.task( "js", function () {
-//   return gulp.src( "dev/js/src/**/*.js" )
-//     .pipe( sourcemaps.init() )
-//     .pipe( babel( {
-//       presets: [ 'es2015' ]
-//     }))
-//   .pipe( concat( "build.js" ) )
-//   .pipe( sourcemaps.write( "." ) )
-//   .pipe( gulp.dest( "dev/js/" ) );
-// });
+
 /*
   Compress Js
 */
@@ -111,6 +80,7 @@ gulp.task( 'minijs', function () {
     .pipe( uglify() )
     .pipe( gulp.dest( 'prod/js' ));
 });
+
 /*
   Compress CSS
 */
@@ -119,23 +89,11 @@ gulp.task( 'minicss', function() {
         .pipe( cssnano() )
         .pipe( gulp.dest( 'prod/css/' ));
 });
-/*
-  Clean generated files
-*/
-// gulp.task( 'clean', function () {
-//   del([
-//     'dist',
-//     './css',
-//     './*.html',
-//     'assets/js/build.js',
-//     'assets/js/build.js*'
-//   ]);
-// });
+
 /*
   Watch
 */
-gulp.task('watch', function () {
-  gulp.watch([ './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'css' ]);
+gulp.task('watch', ['browser-sync'], function () {
 
   var watcher = watchify( browserify( './dev/js/src/app.js', watchify.args ));
   bundle(watcher);
@@ -143,17 +101,28 @@ gulp.task('watch', function () {
     bundle(watcher);
   });
   watcher.on('log', gutil.log);
-  browserSync.init({
-    server: './dev',
-    logFileChanges: false
+  // browserSync.init({
+  //   server: './dev',
+  //   // serveStatic: ['./dev', './dev/css']
+  //   // proxy: "localhost:3000/"
+  //   // index: './index.html',
+  //   logFileChanges: false
+  // });
+  gulp.watch([ './dev/index.html', './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'sass' ]);
+});
+
+gulp.task('browser-sync', function() {
+  browserSync.init(['./dev/css/**.*', './dev/js/**.*'], {
+    server: {
+      baseDir: "./dev"
+    }
   });
-  // gulp.watch([ './dev/js/build.js', './dev/js/**/*' ], [ 'js' ]);
-  // gulp.watch([ './views/*.jade', './views/**/*.jade' ], [ 'jade' ]);
 });
 /*
   Build
 */
-gulp.task('build', [ 'css', 'js', 'html' ]);
+gulp.task('build', [ 'sass', 'js', 'html' ]);
+
 /*
   Deploy to Github
 */
