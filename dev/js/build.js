@@ -3,167 +3,110 @@
 
 var _xhr = require('./xhr');
 
-var _invoice = require('./components/invoice');
+require('./jsons');
 
-(0, _xhr.renderSiteInfo)("data/views/site.json", function (site) {
-  console.log(site);
-  var siteInfo = '\n  <div class="site-info">\n    <em>' + site[0].description + '</em>\n    <p>' + site[0].name + '</p>\n    <p>' + site[0].url + '</p>\n    <p></p>\n  </div>\n  ';
-  document.querySelector('.container h2').innerHTML = siteInfo;
+},{"./jsons":2,"./xhr":3}],2:[function(require,module,exports){
+'use strict';
+
+var _xhr = require('./xhr');
+
+var getSkills = Object.create(_xhr.App);
+getSkills.xhr('../../data/content/skills.json', function (data, xmlhttp) {
+  var skills = JSON.parse(data);
+  // console.log( skills[0].workflow );
+  console.log(skills[0].tools);
+}, function (error, xmlhttp) {
+  console.log('Errorrr', error);
 });
 
-console.log((0, _invoice.sumTwo)(1000, 90, 6));
+var getWorks = Object.create(_xhr.App);
+getWorks.xhr('../../data/content/works.json', function (data, xmlhttp) {
+  var works = JSON.parse(data);
+  console.log(works[0]);
+}, function (error, xmlhttp) {
+  console.log('Error', error);
+});
 
-},{"./components/invoice":2,"./xhr":3}],2:[function(require,module,exports){
+var getBrand = Object.create(_xhr.App);
+getBrand.xhr('../../data/content/brand.json', function (data, xmlhttp) {
+  var brand = JSON.parse(data);
+  console.log(brand[0]);
+}, function (error, xmlhttp) {
+  console.log('Error', error);
+});
+
+var getSocial = Object.create(_xhr.App);
+getSocial.xhr('../../data/content/social.json', function (data, xmlhttp) {
+  var social = JSON.parse(data);
+  console.log(social[0]);
+}, function (error, xmlhttp) {
+  console.log('Error', error);
+});
+
+},{"./xhr":3}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.printToday = printToday;
-exports.sumTwo = sumTwo;
+//www.youtube.com/watch?v=NLzvBcE_nVU
+var App = exports.App = {
 
-// Imprime el dia en que estamos
-function printToday() {
-  var now = new Date();
-  var months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-  var date = (now.getDate() < 10 ? "0" : "") + now.getDate();
-  function fourdigits(number) {
-    return number < 1000 ? number + 1900 : number;
+  xhr: function xhr(url, callback, error) {
+    var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4) {
+        if (xmlhttp.status === 200) {
+          if (typeof callback === 'function') {
+            callback(xmlhttp.responseText, xmlhttp);
+          }
+        } else {
+          if (typeof error === 'function') {
+            error(xmlhttp.statusText, xmlhttp);
+          }
+        }
+      }
+    };
+    xmlhttp.open('GET', url, true);
+    xmlhttp.send();
   }
-  var today = months[now.getMonth()] + " " + date + ", " + fourdigits(now.getYear());
-  return today;
-}
-console.log(printToday());
+};
 
-// let irpf = 15;
-// let iva = 21;
-// let baseImp = 0;
-// let total = 0;
-// let output = `Impuesto: ${ (irpf * 15) / 100 }`;
+// realiza peticion ajaxkb
+// export function getJSON(url, callback) {
+//   let xhr = new XMLHttpRequest();
+//   xhr.onreadystatechange = function () {
+//     callback(this.responseText)
+//   };
+//   xhr.open("GET", url, true);
+//   xhr.send();
+// }
 
-function sumTwo(a, b, c) {
-  return a + b + c;
-}
+// realiza peticion ajaxkb
+// function getJSON( url, callback ) {
+//   let xhr = new XMLHttpRequest();
+//   xhr.onload = function () {
+//     callback( this.responseText );
+//   };
+//   xhr.open( "GET", url, true );
+//   xhr.send();
+// }
+//
+// export function getJsonContents( url, callback ) {
+//   getJSON( url, skills => callback( JSON.parse( skills )));
+// }
 
-// var Invoice = {
-//
-//   moneda: '€',
-//
-//   init: function () {
-//     Invoice.update();
-//     Invoice.uiEvent();
-//     //Invoice.addItem();
-//   },
-//
-//   uiEvent: function() {
-//
-//     var items = document.getElementById('items');
-//     items.addEventListener('click', function( e ) {
-//       e.preventDefault();
-//       console.log('oooooo');
-//       Invoice.update();
-//     });
-//
-//   },
-//
-//   update: function () {
-//
-//     var subtotal = 0,
-//         impuestosTotal = 0,
-//         total = 0;
-//
-//     var itemsDiv = document.querySelectorAll('.itemsDiv');
-//     for (var i=0; i < itemsDiv.length; i++) {
-//       // Toma el valor de .precio
-//       var precio = document.querySelector('.precio');
-//       // Toma el valor de .cantidad
-//       var cantidad = document.querySelector('.cantidad');
-//       // Base imponible (sin impuestos)
-//       var baseImponible = precio * cantidad;
-//       // Toma el select .hayImpuestos
-//       var hayImpuestos = document.getElementById('tx');
-//       // Comprueba si tiene impuestos "si"
-//       if ( hayImpuestos.options[hayImpuestos.selectedIndex].value === 'si' ) {
-//         var ivaPercent = 21,
-//             irpfPercent = 15;
-//         var ivaEuros = ( baseImponible * ivaPercent ) / 100,
-//             irpfEuros = ( baseImponible * irpfPercent ) / 100;
-//         // Calcula IVA - IRPF
-//         var juntaImpuestos = ivaEuros - irpfEuros;
-//         // Suma impuestos a base imponible
-//         var sumaTotal = juntaImpuestos + baseImponible;
-//         // Si hay impuestos entonces el subtotal añade la base imponible
-//         subtotal += sumaTotal;
-//         console.log('xxxxx');
-//       } else {
-//         // Si no hay impuestos entonces el subtotal es el mismo que la base imponible
-//         subtotal += baseImponible;
-//         // $( '#impuestos' ).remove();
-//       }
-//     }
-//
-//
-//     // Imprime el subtotal en el div invoiceSubtotal
-//     document.querySelector('#invoiceSubtotal');
-//     // Imprime el impuesto
-//     document.querySelector('#invoiceTax');
-//     // Imprime el Total de la FACTURA
-//     total = parseFloat( subtotal) + parseFloat( impuestosTotal );
-//     document.querySelector('#invoiceTax');
-//
-//     Invoice.showImpuesto();
-//     Invoice.displayDelete();
-//
-//   },
-//
-//   addItem: function () {
-//     // var html = 'Aqui añadiremos etiquetas html';
-//     document.querySelector('#items');
-//   },
-//
-//   displayDelete: function () {
-//   },
-//
-//   showImpuesto: function () {
-//     /*var impuestosDiv = document.getElementById('impuestos');
-//     var li = document.createElement('li');
-//     console.log(impuestosDiv.appendChild(li));*/
+// let getWorks = new XMLHttpRequest;
+// getWorks.onreadystatechange = function () {
+//   if ( getWorks.readyState === 4 ) {
+//     let works = JSON.parse( getWorks.responseText );
+//     // document.getElementById( 'main' ).innerHTML = JSON.parse( getWorks.responseText );
+//     console.log( works[0].frontend[0].client );
 //   }
-//
-// };
-//
-// // launch
-// Invoice.init();
+// }
+// getWorks.open( 'GET', '../../data/content/works.json' );
+// getWorks.send();
 
-},{}],3:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderSiteInfo = renderSiteInfo;
-function getJSON(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function () {
-    callback(this.responseText);
-  };
-  xhr.open("GET", url, true);
-  xhr.send();
-}
-
-function renderSiteInfo(url, callback) {
-  getJSON(url, function (site) {
-    return callback(JSON.parse(site));
-  });
-}
-
-// var xhr = new XMLHttpRequest();
-// xhr.open('GET', '/user/1', true);
-// xhr.onreadystatechange = function () {
-//   if (this.readyState === 4) {
-//     var user = JSON.parse(xhr.responseText);
-//   }
-// };
-// xhr.send();
+// console.log(getSkills);
 
 },{}]},{},[1]);
