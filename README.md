@@ -1,16 +1,9 @@
 # SSPIA
 Static Single Page Invoice Application that uses only Web Standards (HTML, JavaScript, CSS, [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)).
 
-# HTML+CSS+JS are my framework
+# HTML + CSS + Raw JS
 
-With newer standards like:
-
-- HTML Imports
-- Object.observe
-- Promises
-- HTML Templates
-
-I think it's time to rethink the model of JS frameworks. There's no need to invent yet another way to do something, just use HTML+CSS+JS. [source](http://bitworking.org/news/2014/05/zero_framework_manifesto)
+I think it's time to reinvent the wheel. There's no need to invent yet another way to do something, just deeping on HTML + CSS + JS.
 
 
 ## Background
@@ -38,11 +31,6 @@ Workflow Review
    * This is far better than doing your development over an SSH connection
  * DOM Inspector ([`<p>Hello</p>`](http://jsbin.com/nuduzahoga/1/edit))
  * JavaScript Console ([`console.log("Hello");`](http://jsbin.com/luxiqonefa/1/edit))
- * Pendiente añadir:
-  * Gulp
-  * Sass
-  * BrowserSync
-  * NPM Dev Dependencies
 
 
 Navigation Interface
@@ -51,9 +39,8 @@ Navigation Interface
  * A single page with no reload
  * Dynamic behavior added using JavaScript
  * Content fetched as needed
- * Routing using a [fragment identifier](http://en.wikipedia.org/wiki/Fragment_identifier)
-   * Was the standard practice for a long time
+ * Routing:
+   * page.js
    * Slowly being replaced by HTML5 History API
  * Routing using [HTML5 History API](http://diveintohtml5.info/history.html)
-   * [CanIUse Report](http://caniuse.com/#search=history)
  * Caching
