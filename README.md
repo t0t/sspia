@@ -4,7 +4,7 @@ Static Single Page Application that uses Web Standards. I think it's time to rei
   - HTML
   - JS/ES6
   - CSS/SASS
-  - [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model))
+  - [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
   - JSON
 
 
@@ -14,11 +14,8 @@ Static Single Page Application that uses Web Standards. I think it's time to rei
  * Information fetched on the fly using [XMLHTTPRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) `let xhr = new Xhr();`
  * [AJAX](http://en.wikipedia.org/wiki/Ajax_(programming))
  * Routing with [Page.js](https://visionmedia.github.io/page.js/). [HTML5 History API](http://diveintohtml5.info/history.html)
- * Single Page Application
- * A single page with no reload
  * Dynamic behavior added using JavaScript
  * Content fetched as needed
- * Caching
 
 ## Workflow
 
