@@ -21,7 +21,7 @@ xhr.send( '../../data/content/skills.json' )
 xhr.send( '../../data/content/works.json' )
 .then( function(works) {
 
-  console.log('ddh');
+  console.log('oo');
   console.log(works);
   console.log(works[0].frontend);
 

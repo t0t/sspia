@@ -101,13 +101,6 @@ gulp.task('watch', ['browser-sync'], function () {
     bundle(watcher);
   });
   watcher.on('log', gutil.log);
-  // browserSync.init({
-  //   server: './dev',
-  //   // serveStatic: ['./dev', './dev/css']
-  //   // proxy: "localhost:3000/"
-  //   // index: './index.html',
-  //   logFileChanges: false
-  // });
   gulp.watch([ './dev/index.html', './dev/sass/*.scss', 'dev/sass/**/*.scss' ], [ 'sass' ]);
 });
 
