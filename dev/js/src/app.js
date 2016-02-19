@@ -1,4 +1,7 @@
 
+// Invoice mini app
+import './components/invoice';
+
 // Objeto App
 import Xhr from './xhr';
 var xhr = new Xhr( { json: true } );
@@ -21,7 +24,6 @@ xhr.send( '../../data/content/skills.json' )
 xhr.send( '../../data/content/works.json' )
 .then( function(works) {
 
-  console.log('oo');
   console.log(works);
   console.log(works[0].frontend);
 

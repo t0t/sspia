@@ -1,19 +1,4 @@
 
-// Imprime el dia en que estamos
-export function printToday() {
-  var now = new Date();
-  var months = new Array('January','February','March','April','May','June','July','August','September','October','November','December');
-  var date = ((now.getDate()<10) ? "0" : "")+ now.getDate();
-  function fourdigits(number) {
-    return (number < 1000) ? number + 1900 : number;
-  }
-  var today =  months[now.getMonth()] + " " + date + ", " + (fourdigits(now.getYear()));
-  return today;
-}
-console.log( printToday() );
-
-
-
 // let irpf = 15;
 // let iva = 21;
 // let baseImp = 0;
@@ -22,24 +7,29 @@ console.log( printToday() );
 
 
 
-export function sumTwo(a, b, c) {
-  return a + b + c;
-}
+// export function sumTwo(a, b, c) {
+//   return a + b + c;
+// }
 
+let items = document.querySelectorAll('.items');
+console.log( items );
+console.log( items[0].children[1].outerHTML );
+console.log( items[0].childNodes[1].children );
+console.log( items[0].children[0].options );
 
+console.log( items[0].children[1] );
 
+let cantidad = document.querySelector('.cantidad');
+cantidad.addEventListener( 'keyup', function (e) {
+  e.preventDefault;
+  if (e.which === 13) {
+    console.log(this.textcontent.value);
+  }
+});
 
-
-
-
-
-
-
-
-
-
-
-
+console.log( cantidad );
+console.log( cantidad.attributes );
+console.log( cantidad.value.nodeValue ); // 83
 
 
 

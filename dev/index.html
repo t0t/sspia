@@ -18,8 +18,36 @@
 
     <button id="loadSkills" type="button" name="button">LOAD JSON</button>
     <button id="loadPage" type="button" name="button">LOAD HTML TEMPLATE</button>
+    <button id="loadInvoice" type="button" name="button">LOAD INVOICE</button>
 
     <div id="main"></div>
+
+    <div id="invoice" class="invoiceApp">
+      Factura Nº <input type="text" value="001.13">
+      <label for="date">Fecha</label><input type="date" value="">
+
+      <div class="items">
+        <select name="type">
+          <option value="service">Servicio</option>
+          <option value="product">Producto</option>
+          <option value="hour">Hora</option>
+          <option value="day">Día</option>
+        </select>
+
+        <input type="text" class="desc" name="description" value="" placeholder="product/service description herttde...">
+        <input type="number" class="precio" name="precio" step="0.01" value="15.00">
+        <input type="number" class="cantidad" name="cantidad" step="1" value="200">
+
+        <select name="impuesto" class="hayImpuestos" id="tx">
+          <option value="no">No</option>
+          <option value="si">IVA, IRPF</option>
+        </select>
+
+        <div class="base-imponible">0€</div>
+      </div>
+
+      <a href="#" class="delete">X</a>
+    </div>
 
 
     <!-- Dynamic content will be placed here by JavaScript. -->
