@@ -16,109 +16,58 @@
       </nav>
     </header> -->
 
-    <button id="loadSkills" type="button" name="button">LOAD JSON</button>
-    <button id="loadPage" type="button" name="button">LOAD HTML TEMPLATE</button>
-    <button id="loadInvoice" type="button" name="button">LOAD INVOICE</button>
+    <!-- <nav>
+      <button id="loadSkills" type="button" name="button">LOAD JSON</button>
+      <button id="loadPage" type="button" name="button">LOAD HTML TEMPLATE</button>
+    </nav>
 
-    <div id="main"></div>
+  -->
+
+  <div id="main"></div>
+
 
     <div id="invoice" class="invoiceApp">
+
       Factura Nº <input type="text" value="001.13">
       <label for="date">Fecha</label><input type="date" value="">
 
-      <div class="items">
-        <select name="type">
+      <div class="invoice__row">
+        <!-- <select name="type">
           <option value="service">Servicio</option>
           <option value="product">Producto</option>
           <option value="hour">Hora</option>
           <option value="day">Día</option>
-        </select>
+        </select> -->
 
-        <input type="text" class="desc" name="description" value="" placeholder="product/service description herttde...">
+        <input type="text" class="task" name="description" value="" placeholder="Tarea">
         <input type="number" class="precio" name="precio" step="0.01" value="" placeholder="Precio">
         <input type="number" class="cantidad" name="cantidad" step="1" value="" placeholder="Cantidad">
 
-        <select name="impuesto" class="hayImpuestos" id="tx">
+        <select name="impuesto" class="hayImpuestos">
           <option value="no">No</option>
           <option value="si">IVA, IRPF</option>
         </select>
 
-        <div class="base-imponible">0€</div>
+        <fieldset>
+          <label for="baseimp">Base Imponible:</label>
+          <input type="number" class="base_imp" name="baseimp" step="1" value="" placeholder="Base imponible"> €
+        </fieldset>
+
+        <fieldset>
+          <label for="eltotal">El total:</label>
+          <input type="number" class="total" name="eltotal" step="1" value="" placeholder="TOTAL A PAGAR"> €
+        </fieldset>
+
       </div>
 
       <a href="#" class="delete">X</a>
+
+      <button class="btn-invoice" type="button" name="button">Generar factura</button>
+
     </div>
 
 
-    <!-- Dynamic content will be placed here by JavaScript. -->
-    <!-- <main id="mainContent">
-      <div class="container">
-
-        <h2>SF Sergio Forés</h2>
-        <p>Cliente: laks dgjsfffkaf a</p>
-        <h2>Factura Nº <input type="text" value="001.13"></h2>
-        <label for="date">Fecha</label>
-        <input type="date" value="">
-
-
-        <div class="tabla">
-
-          <div id="items" class="itemsDiv">
-            <div>hhh</div>
-            <div>
-
-              <select name="type">
-                <option value="service">Servicio</option>
-                <option value="product">Producto</option>
-                <option value="hour">Hora</option>
-                <option value="day">Día</option>
-              </select>
-
-              <input type="text" class="desc" name="description" value="" placeholder="product/service description herttde...">
-              <input type="number" class="precio" name="precio" step="0.01" value="15.00">
-              <input type="number" class="cantidad" name="cantidad" step="1" value="83">
-
-              <select name="impuesto" class="hayImpuestos" id="tx">
-                <option value="no">No</option>
-                <option value="si">IVA, IRPF</option>
-              </select>
-
-              <div class="base-imponible">0€</div>
-
-              <a href="#" class="delete">X</a>
-
-
-            </div>
-
-          </div>
-
-
-          <div class="invoice-totals">
-
-            <h3>Subtotals</h3>
-            <div id="invoiceSubtotal"></div>
-
-            <div class="impuesto-container">
-              <ul id="impuestos">
-                <li>Tasa Impuesdto</li>
-                <li>Valorffd</li>
-                <li>Cantidad a añadddir por impuestos</li>
-                <li id="invoiceTax"></li>
-              </ul>
-            </div>
-
-            <h3>Total Factura</h3>
-            <p id="invoiceTotal"></p>
-
-          </div>
-
-        </div>
-
-          <a href="" id="addItemButton">Añadir tarea +</a>
-      </div>
-    </main>
-
-    <footer>Main footer</footer> -->
+    <footer></footer>
 
     <!-- The JavaScript build. -->
     <script src="js/build.js"></script>

@@ -7,15 +7,14 @@ var _xhr = require('./xhr');
 
 var _xhr2 = _interopRequireDefault(_xhr);
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Invoice mini app
 
 var xhr = new _xhr2.default({ json: true });
 
 // Skills
+
 
 // Objeto App
 xhr.send('../../data/content/skills.json').then(function (skills) {
@@ -41,128 +40,113 @@ xhr.send('../../data/content/works.json').then(function (works) {
 },{"./components/invoice":2,"./xhr":3}],2:[function(require,module,exports){
 'use strict';
 
-// let irpf = 15;
-// let iva = 21;
-// let baseImp = 0;
-// let total = 0;
-// let output = `Impuesto: ${ (irpf * 15) / 100 }`;
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
 
-// export function sumTwo(a, b, c) {
-//   return a + b + c;
-// }
-
-var items = document.querySelectorAll('.items');
-console.log(items);
-
-var cantidad = document.querySelector('.cantidad');
-cantidad.addEventListener('keyup', function (e) {
-  e.preventDefault;
-  if (e.which === 13) {
-    console.log(this.value);
-    cantidad.textContent = this.value;
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
   }
-});
+}
 
-var precio = document.querySelector('.precio');
-precio.addEventListener('keyup', function (e) {
-  e.preventDefault;
-  if (e.which === 13) {
-    console.log(this.value);
+var Invoice = function () {
+  function Invoice() {
+    // this.number = number;
+
+    _classCallCheck(this, Invoice);
   }
+
+  _createClass(Invoice, [{
+    key: 'getTask',
+    value: function getTask() {
+      var elTask = document.querySelector('.task');
+      var task = elTask.value;
+      return task;
+    }
+  }, {
+    key: 'getCantidad',
+    value: function getCantidad() {
+      var elCantidad = document.querySelector('.cantidad');
+      var cantidad = elCantidad.value;
+      return cantidad;
+    }
+  }, {
+    key: 'getPrice',
+    value: function getPrice() {
+      var elPrecio = document.querySelector('.precio');
+      var precio = elPrecio.value;
+      return precio;
+    }
+  }, {
+    key: 'calcIva',
+    value: function calcIva() {
+      var iva = this.calcBaseImp() * 21 / 100;
+      return iva; // cantidad que se suma al imponible
+    }
+  }, {
+    key: 'calcIrpf',
+    value: function calcIrpf() {
+      var irpf = this.calcBaseImp() * 15 / 100;
+      return irpf; // cantidad que se resta al iva
+    }
+  }, {
+    key: 'calcTaxes',
+    value: function calcTaxes() {
+      var taxed = document.querySelector('.hayImpuestos').children;
+      var taxes = 0;
+      if (taxed[0].selected === false) {
+        taxes = this.calcIva() - this.calcIrpf();
+      }
+      return taxes; // si es true: cantidad a sumar a la vase imponible
+    }
+  }, {
+    key: 'calcBaseImp',
+    value: function calcBaseImp() {
+      var baseImp = this.getCantidad() * this.getPrice();
+      return baseImp;
+    }
+  }, {
+    key: 'calcTotal',
+    value: function calcTotal() {
+      var total = this.calcBaseImp() + this.calcTaxes();
+      return total;
+    }
+  }]);
+
+  return Invoice;
+}();
+
+var factura = new Invoice();
+
+// DOM Elements
+var elItems = document.querySelector('.items'),
+    elBaseImp = document.querySelector('.base_imp'),
+    elTotal = document.querySelector('.total'),
+    elBtnInvoice = document.querySelector('.btn-invoice');
+
+// Generate buton
+elBtnInvoice.addEventListener('click', function (e) {
+  e.preventDefault;
+
+  elBaseImp.value = factura.calcBaseImp();
+  elTotal.value = factura.calcTotal();
+
+  console.log('Tarea: ' + factura.getTask());
+  console.log('Cantidad: ' + factura.getCantidad());
+  console.log('Precio: ' + factura.getPrice());
+  console.log('IVA: ' + factura.calcIva());
+  console.log('IRPF: ' + factura.calcIrpf());
+  console.log('Total impuestos a añadir: ' + factura.calcTaxes());
+  console.log('Base Imponible: ' + factura.calcBaseImp());
+  console.log('TOTAL: ' + factura.calcTotal());
 });
-
-console.log(cantidad);
-console.log(cantidad.value.nodeValue); // 83
-
-// var Invoice = {
-//
-//   moneda: '€',
-//
-//   init: function () {
-//     Invoice.update();
-//     Invoice.uiEvent();
-//     //Invoice.addItem();
-//   },
-//
-//   uiEvent: function() {
-//
-//     var items = document.getElementById('items');
-//     items.addEventListener('click', function( e ) {
-//       e.preventDefault();
-//       console.log('oooooo');
-//       Invoice.update();
-//     });
-//
-//   },
-//
-//   update: function () {
-//
-//     var subtotal = 0,
-//         impuestosTotal = 0,
-//         total = 0;
-//
-//     var itemsDiv = document.querySelectorAll('.itemsDiv');
-//     for (var i=0; i < itemsDiv.length; i++) {
-//       // Toma el valor de .precio
-//       var precio = document.querySelector('.precio');
-//       // Toma el valor de .cantidad
-//       var cantidad = document.querySelector('.cantidad');
-//       // Base imponible (sin impuestos)
-//       var baseImponible = precio * cantidad;
-//       // Toma el select .hayImpuestos
-//       var hayImpuestos = document.getElementById('tx');
-//       // Comprueba si tiene impuestos "si"
-//       if ( hayImpuestos.options[hayImpuestos.selectedIndex].value === 'si' ) {
-//         var ivaPercent = 21,
-//             irpfPercent = 15;
-//         var ivaEuros = ( baseImponible * ivaPercent ) / 100,
-//             irpfEuros = ( baseImponible * irpfPercent ) / 100;
-//         // Calcula IVA - IRPF
-//         var juntaImpuestos = ivaEuros - irpfEuros;
-//         // Suma impuestos a base imponible
-//         var sumaTotal = juntaImpuestos + baseImponible;
-//         // Si hay impuestos entonces el subtotal añade la base imponible
-//         subtotal += sumaTotal;
-//         console.log('xxxxx');
-//       } else {
-//         // Si no hay impuestos entonces el subtotal es el mismo que la base imponible
-//         subtotal += baseImponible;
-//         // $( '#impuestos' ).remove();
-//       }
-//     }
-//
-//
-//     // Imprime el subtotal en el div invoiceSubtotal
-//     document.querySelector('#invoiceSubtotal');
-//     // Imprime el impuesto
-//     document.querySelector('#invoiceTax');
-//     // Imprime el Total de la FACTURA
-//     total = parseFloat( subtotal) + parseFloat( impuestosTotal );
-//     document.querySelector('#invoiceTax');
-//
-//     Invoice.showImpuesto();
-//     Invoice.displayDelete();
-//
-//   },
-//
-//   addItem: function () {
-//     // var html = 'Aqui añadiremos etiquetas html';
-//     document.querySelector('#items');
-//   },
-//
-//   displayDelete: function () {
-//   },
-//
-//   showImpuesto: function () {
-//     /*var impuestosDiv = document.getElementById('impuestos');
-//     var li = document.createElement('li');
-//     console.log(impuestosDiv.appendChild(li));*/
-//   }
-//
-// };
-//
-// // launch
-// Invoice.init();
 
 },{}],3:[function(require,module,exports){
 'use strict';
