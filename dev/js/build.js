@@ -7,14 +7,15 @@ var _xhr = require('./xhr');
 
 var _xhr2 = _interopRequireDefault(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 // Invoice mini app
 
 var xhr = new _xhr2.default({ json: true });
 
 // Skills
-
 
 // Objeto App
 xhr.send('../../data/content/skills.json').then(function (skills) {
@@ -52,22 +53,25 @@ xhr.send('../../data/content/works.json').then(function (works) {
 
 var items = document.querySelectorAll('.items');
 console.log(items);
-console.log(items[0].children[1].outerHTML);
-console.log(items[0].childNodes[1].children);
-console.log(items[0].children[0].options);
-
-console.log(items[0].children[1]);
 
 var cantidad = document.querySelector('.cantidad');
 cantidad.addEventListener('keyup', function (e) {
   e.preventDefault;
   if (e.which === 13) {
-    console.log(this.textcontent.value);
+    console.log(this.value);
+    cantidad.textContent = this.value;
+  }
+});
+
+var precio = document.querySelector('.precio');
+precio.addEventListener('keyup', function (e) {
+  e.preventDefault;
+  if (e.which === 13) {
+    console.log(this.value);
   }
 });
 
 console.log(cantidad);
-console.log(cantidad.attributes);
 console.log(cantidad.value.nodeValue); // 83
 
 // var Invoice = {

@@ -13,22 +13,26 @@
 
 let items = document.querySelectorAll('.items');
 console.log( items );
-console.log( items[0].children[1].outerHTML );
-console.log( items[0].childNodes[1].children );
-console.log( items[0].children[0].options );
 
-console.log( items[0].children[1] );
 
 let cantidad = document.querySelector('.cantidad');
 cantidad.addEventListener( 'keyup', function (e) {
   e.preventDefault;
   if (e.which === 13) {
-    console.log(this.textcontent.value);
+    console.log(this.value);
+    cantidad.textContent = this.value;
+  }
+});
+
+let precio = document.querySelector('.precio');
+precio.addEventListener( 'keyup', function (e) {
+  e.preventDefault;
+  if (e.which === 13) {
+    console.log(this.value);
   }
 });
 
 console.log( cantidad );
-console.log( cantidad.attributes );
 console.log( cantidad.value.nodeValue ); // 83
 
 
