@@ -1,14 +1,23 @@
-
+// MODEL models.js
 class Invoice {
 
-  constructor() {
-    // this.number = number;
+  constructor(name) {
+    this.name = name;
+    this.tasks = [];
   }
 
   getTask() {
     let elTask = document.querySelector('.task');
     let task = elTask.value;
     return task;
+  }
+
+  addTask(task) {
+    this.tasks.push(task);
+  }
+
+  delTask(task) {
+    this.tasks.push(task);
   }
 
   getCantidad() {
@@ -56,30 +65,51 @@ class Invoice {
 
 
 
+// CONTROLLER controllers.js
 
-
-const factura = new Invoice();
 
 // DOM Elements
-let elItems = document.querySelector('.items'),
-    elBaseImp = document.querySelector('.base_imp'),
-    elTotal = document.querySelector('.total'),
-    elBtnInvoice = document.querySelector('.btn-invoice');
+let elItems =       document.querySelector( '.items' ),
+    elBaseImp =     document.querySelector( '.base_imp' ),
+    elIva =         document.querySelector( '.iva' ),
+    elIrpf =        document.querySelector( '.irpf' ),
+    elTaxTotal =    document.querySelector( '.tax_total' ),
+    elTotal =       document.querySelector( '.total' ),
+    elTaskRow =     document.querySelector( '.invoice__row' ),
+    elBtnAddTask =  document.querySelector( '.btn-add' ),
+    elBtnDelTask =  document.querySelector( '.btn-delete' ),
+    elBtnInvoice =  document.querySelector( '.btn-invoice' );
 
+var factura = new Invoice();
 
-// Generate buton
-elBtnInvoice.addEventListener( 'click', function (e) {
+// Generate invoice
+function printInvoice(e) {
   e.preventDefault;
+  // Pinta datos en el DOM
+  elIva.value       =   factura.calcIva();
+  elIrpf.value      =   factura.calcIrpf();
+  elTaxTotal.value  =   factura.calcTaxes();
+  elBaseImp.value   =   factura.calcBaseImp();
+  elTotal.value     =   factura.calcTotal();
+  // console.log( 'Tarea: ' + factura.getTask());
+  // console.log( 'Cantidad: ' + factura.getCantidad());
+  // console.log( 'Precio: ' + factura.getPrice());
+}
 
-  elBaseImp.value = factura.calcBaseImp();
-  elTotal.value = factura.calcTotal();
+// Print new task
+function addTask(e) {
+  e.preventDefault;
+  factura.addTask(factura.getTask());
+  console.log(factura.tasks);
+  console.log(elTaskRow);
+}
 
-  console.log( 'Tarea: ' + factura.getTask());
-  console.log( 'Cantidad: ' + factura.getCantidad());
-  console.log( 'Precio: ' + factura.getPrice());
-  console.log( 'IVA: ' + factura.calcIva());
-  console.log( 'IRPF: ' + factura.calcIrpf());
-  console.log( 'Total impuestos a añadir: ' + factura.calcTaxes());
-  console.log( 'Base Imponible: ' + factura.calcBaseImp());
-  console.log( 'TOTAL: ' + factura.calcTotal());
-});
+// Delete Task
+function delTask(e) {
+  e.preventDefault;
+  factura.delTask(factura.getTask());
+}
+
+elBtnInvoice.addEventListener( 'click', printInvoice );
+elBtnAddTask.addEventListener( 'click', addTask );
+elBtnDelTask.addEventListener( 'click', delTask );

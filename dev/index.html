@@ -26,41 +26,46 @@
   <div id="main"></div>
 
 
-    <div id="invoice" class="invoiceApp">
+    <div class="invoiceApp">
 
       Factura Nº <input type="text" value="001.13">
       <label for="date">Fecha</label><input type="date" value="">
 
       <div class="invoice__row">
-        <!-- <select name="type">
-          <option value="service">Servicio</option>
-          <option value="product">Producto</option>
-          <option value="hour">Hora</option>
-          <option value="day">Día</option>
-        </select> -->
 
         <input type="text" class="task" name="description" value="" placeholder="Tarea">
         <input type="number" class="precio" name="precio" step="0.01" value="" placeholder="Precio">
         <input type="number" class="cantidad" name="cantidad" step="1" value="" placeholder="Cantidad">
 
         <select name="impuesto" class="hayImpuestos">
-          <option value="no">No</option>
+          <option value="no">Sin impuestos</option>
           <option value="si">IVA, IRPF</option>
         </select>
 
         <fieldset>
+          <label for="iva">21% IVA:</label>
+          <input type="number" class="iva" name="iva" step="1" value="">
+          <label for="irpf">-15% IRPF:</label>
+          <input type="number" class="irpf" name="irpf" step="1" value="">
+          <label for="tax_total">Total Impuestos:</label>
+          <input type="number" class="tax_total" name="taxes" step="1" value="">
+        </fieldset>
+
+        <fieldset>
           <label for="baseimp">Base Imponible:</label>
-          <input type="number" class="base_imp" name="baseimp" step="1" value="" placeholder="Base imponible"> €
+          <input type="number" class="base_imp" name="baseimp" step="1" value="">
         </fieldset>
 
         <fieldset>
           <label for="eltotal">El total:</label>
-          <input type="number" class="total" name="eltotal" step="1" value="" placeholder="TOTAL A PAGAR"> €
+          <input type="number" class="total" name="eltotal" step="1" value=""> €
         </fieldset>
+
+        <button class="btn-delete" type="button" name="button"> - </button>
+        <button class="btn-add" type="button" name="button"> + </button>
 
       </div>
 
-      <a href="#" class="delete">X</a>
 
       <button class="btn-invoice" type="button" name="button">Generar factura</button>
 

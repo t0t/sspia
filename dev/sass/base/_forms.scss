@@ -1,0 +1,22 @@
+
+label {
+  display: inline-block;
+  margin-left: $padding-base / 2;
+  margin-right: $padding-base / 2;
+}
+
+input[type=text],
+input[type=number],
+input[type=date],
+select {
+  width: 150px;
+  // font-size: 1em;
+  border: none;
+  padding: $padding-forms ($padding-forms + 3);
+  outline: none;
+  background-color: $color-white;
+}
+
+fieldset {
+  border: 0;
+}
