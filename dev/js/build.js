@@ -1,22 +1,68 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-'use strict';
+"use strict";
 
-require('./components/invoice');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _xhr = require('./xhr');
+require("./components/invoice");
+
+var _xhr = require("./xhr");
 
 var _xhr2 = _interopRequireDefault(_xhr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Template = function () {
+  function Template(clase) {
+    _classCallCheck(this, Template);
+
+    this.clase = clase;
+    this.list = [];
+    this.elements = {
+      div: "div",
+      p: "p"
+    };
+  }
+
+  _createClass(Template, [{
+    key: "addItem",
+    value: function addItem(listItem) {
+      this.list.push(listItem);
+    }
+  }]);
+
+  return Template;
+}();
+
+var tpl = new Template('tpl');
+
+tpl.addItem('elements');
+tpl.addItem('edcrece');
+tpl.addItem('kjlkjlkjlkjlkj');
+
+console.log(tpl);
+console.log(tpl.list);
+console.log(tpl.elements.div);
+
+// console.table(list());
+//
+// var divEl = document.addItemElement( 'div' );
+//
+// divEl.className = 'div_el';
+//
+//
+// console.table( template );
+// console.table( template.addItemElements( 'li' ) );
+
 // Invoice mini app
+
+
+// Objeto App
 
 var xhr = new _xhr2.default({ json: true });
 
 // Skills
-
-
-// Objeto App
 xhr.send('../../data/content/skills.json').then(function (skills) {
 
   for (var i = 0; i < skills[0].tools.length; i++) {
@@ -40,21 +86,9 @@ xhr.send('../../data/content/works.json').then(function (works) {
 },{"./components/invoice":2,"./xhr":3}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // MODEL models.js
 
@@ -139,6 +173,7 @@ var Invoice = function () {
 // CONTROLLER controllers.js
 
 // DOM Elements
+
 
 var elItems = document.querySelector('.items'),
     elBaseImp = document.querySelector('.base_imp'),

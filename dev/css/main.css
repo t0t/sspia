@@ -3,35 +3,189 @@
   box-sizing: border-box; }
 
 body {
-  font-family: 'Source Sans Pro';
-  font-size: 20px;
+  font-family: "Source Sans Pro";
+  font-size: 100%;
   padding: 25px;
-  background-color: #a0d4e0; }
+  background-color: rgba(255, 255, 255, 0.2); }
+
+p {
+  font-size: 90%;
+  margin-top: 5px;
+  margin-bottom: 5px; }
 
 label {
-  display: inline-block;
-  margin-left: 12.5px;
-  margin-right: 12.5px; }
+  display: inline-block; }
 
 input[type=text],
 input[type=number],
 input[type=date],
 select {
-  width: 150px;
+  font-size: 100%;
   border: none;
-  padding: 10px 13px;
   outline: none;
-  background-color: rgba(255, 255, 255, 0.2); }
+  background-color: transparent; }
 
 fieldset {
-  border: 0; }
+  border: 0;
+  text-align: right; }
+
+input[type="date"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="time"],
+input[type="week"] {
+  font-family: "Source Sans Pro"; }
+
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: pink; }
+  .icon--facebook, .icon--twitter {
+    fill: #a0d4e0;
+    stroke: pink;
+    stroke-width: 1px; }
+  .icon--email {
+    fill: #a0d4e0;
+    stroke: pink;
+    stroke-width: 1px; }
+  .icon--cc {
+    fill: #a0d4e0;
+    width: 100px; }
+  .icon--lupa {
+    stroke: pink;
+    stroke-width: 1px;
+    width: 21px;
+    height: 21px; }
+  .icon--close {
+    z-index: 1000;
+    fill: #a0d4e0;
+    position: fixed; }
+  .icon--toggle {
+    margin-right: 0;
+    stroke: pink; }
+    .icon--toggle path {
+      stroke-width: 1px; }
+  .icon--logo {
+    fill: black;
+    height: 50px; }
+  .icon--logo2 {
+    width: 249px;
+    height: 72px;
+    fill: #a0d4e0; }
+  .icon--arrow-left {
+    width: 150px;
+    height: 75px;
+    stroke: pink; }
+  .icon--arrow-right {
+    width: 150px;
+    height: 75px;
+    stroke: pink;
+    stroke-width: 1px; }
+
+.site {
+  max-width: 1152px;
+  margin: 0 auto; }
+
+.site-header {
+  width: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 12.5px;
+  padding-left: 19.23077px;
+  padding-bottom: 12.5px;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f3f3f3; }
+  .site-header a {
+    color: #a0d4e0; }
+  .site-header label {
+    margin-right: 0; }
+
+.site__footer {
+  font-size: 75%;
+  text-align: center;
+  padding-top: 12.5px;
+  padding-bottom: 12.5px; }
 
 .invoiceApp {
-  padding: 25px;
-  background-color: rgba(255, 255, 255, 0.2); }
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
 
 .invoice__row {
-  padding: 25px;
-  background-color: rgba(255, 255, 255, 0.2); }
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  line-height: 2.5;
+  text-align: center;
+  border: 1px dotted black; }
+
+.invoice__id {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 150px;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.invoice__results {
+  width: 75%;
+  background-color: #f3f3f3; }
+
+.invoice__taxes {
+  border-bottom: 1px dotted black; }
+
+.invoice__date {
+  margin-top: 25px; }
+
+input[class="invoice__number"],
+input[class="invoice__date"] {
+  width: 100px; }
+
+input[class="task"] {
+  width: 250px; }
+
+input[class="total"] {
+  font-size: 150%; }
+
+.total {
+  font-weight: bold; }
+
+.brand {
+  -webkit-flex: 1 50%;
+  -ms-flex: 1 50%;
+  flex: 1 50%; }
+
+.brand-client {
+  -webkit-flex: 1 50%;
+  -ms-flex: 1 50%;
+  flex: 1 50%; }
+
+.brand__logo {
+  -webkit-flex: 1 auto;
+  -ms-flex: 1 auto;
+  flex: 1 auto; }
+  .brand__logo svg {
+    height: 50px; }
+
+.brand__name {
+  font-weight: bold;
+  font-size: 1.1em;
+  letter-spacing: 1px; }
 
 /*# sourceMappingURL=main.css.map */

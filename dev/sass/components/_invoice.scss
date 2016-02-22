@@ -1,11 +1,57 @@
 
 .invoiceApp {
   // height: 200px;
-  padding: $padding-base;
-  background-color: $color-white;
+  // padding: $padding-base;
+  // background-color: $color-white;
+
+  align-self: flex-end;
+  justify-content: flex-end;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .invoice__row {
-  padding: $padding-base;
-  background-color: $color-white;
+  width: 100%;
+  margin-top: $padding-base;
+  margin-bottom: $padding-base;
+  line-height: 2.5;
+  text-align: center;
+  // background-color: $color-white;
+  border: 1px dotted $color-black;
+}
+
+.invoice__id {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+}
+
+.invoice__results {
+  width: 75%;
+  background-color: $color-gray;
+}
+
+.invoice__taxes {
+  border-bottom: 1px dotted $color-black;
+}
+
+.invoice__number {}
+
+.invoice__date {
+  margin-top: $padding-base;
+}
+
+input[class="invoice__number"],
+input[class="invoice__date"] { 
+  width: 100px;
+}
+input[class="task"] {
+  width: 250px;
+}
+input[class="total"] {
+  font-size: 150%;
+}
+.total {
+  font-weight: bold;
 }

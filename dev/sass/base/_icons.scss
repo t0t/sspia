@@ -1,0 +1,59 @@
+.icon {
+  width: 30px;
+  height: 30px;
+  fill: $color-alt;
+  &--facebook,
+  &--twitter {
+    fill: $color-base;
+    stroke: $color-alt;
+    stroke-width: 1px;
+  }
+  &--email {
+    fill: $color-base;
+    stroke: $color-alt;
+    stroke-width: 1px;
+  }
+  &--cc {
+    fill: $color-base;
+    width: 100px;
+  }
+  &--lupa {
+    stroke: $color-alt;
+    stroke-width: 1px;
+    width: 21px;
+    height: 21px;
+  }
+  &--close {
+    z-index: 1000;
+    fill: $color-base;
+    position: fixed;
+  }
+  &--toggle {
+    margin-right: 0;
+    stroke: $color-alt;
+    path {
+      stroke-width: 1px;
+    }
+  }
+  &--logo {
+    // width: 50px;
+    fill: $color-black;
+    height: 50px;
+  }
+  &--logo2 {
+    width: 249px;
+    height: 72px;
+    fill: $color-base;
+  }
+  &--arrow-left {
+    width: 150px;
+    height: 75px;
+    stroke: $color-alt;
+  }
+  &--arrow-right {
+    width: 150px;
+    height: 75px;
+    stroke: $color-alt;
+    stroke-width: 1px;
+  }
+}

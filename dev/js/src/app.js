@@ -1,4 +1,57 @@
 
+
+
+
+class Template {
+
+  constructor( clase ) {
+    this.clase = clase;
+    this.list = [];
+    this.elements = {
+      div: "div",
+      p: "p",
+    };
+  }
+
+  addItem(listItem) {
+    this.list.push(listItem);
+  }
+
+}
+
+let tpl = new Template( 'tpl' );
+
+tpl.addItem( 'elements' );
+tpl.addItem( 'edcrece' );
+tpl.addItem( 'kjlkjlkjlkjlkj' );
+
+
+console.log( tpl );
+console.log( tpl.list );
+console.log( tpl.elements.div );
+
+// console.table(list());
+//
+// var divEl = document.addItemElement( 'div' );
+//
+// divEl.className = 'div_el';
+//
+//
+// console.table( template );
+// console.table( template.addItemElements( 'li' ) );
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Invoice mini app
 import './components/invoice';
 
