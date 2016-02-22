@@ -1,6 +1,8 @@
 # SSPIA
 Static Single Page Application that uses Web Standards. I think it's time to reinvent the wheel. There's no need to invent yet another way to do something, just deeping on HTML-CSS-JS.
 
+![Screenshot](./screenshot.png)
+
   - HTML
   - JS/ES6
     - Modules
