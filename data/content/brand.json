@@ -1,0 +1,17 @@
+[
+
+  {
+    "name": "SF - Sergio Forés",
+    "description": "Aqui escribiremos nuestra filosofía y manera de hacer...",
+    "role": "Diseñador Front-End",
+    "email": "sergiofores@gmail.com",
+    "logo": "img/logo.svg",
+    "cif": "18993454-P",
+    "address": "c/ Nou, 5 08773 Sant Joan de Mediona",
+    "phone": "607 471777",
+    "websites": {
+      "url": "http://sergiofores.net"
+    }
+  }
+
+]
