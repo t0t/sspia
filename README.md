@@ -29,8 +29,8 @@
 
 ## To Do
 
-- [] Añadir Tarea
-- [] Eliminar Tarea
-- [] Añadir Imprimir
+- [ ] Añadir Tarea
+- [ ] Eliminar Tarea
+- [ ] Añadir Imprimir
 - [x] Select con impuestos o sin
-- [] JSON as Db
+- [ ] JSON as Db
