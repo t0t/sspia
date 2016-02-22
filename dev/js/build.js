@@ -1,94 +1,76 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _invoice = require('./model/invoice');
 
-require("./components/invoice");
+var _invoice2 = _interopRequireDefault(_invoice);
 
-var _xhr = require("./xhr");
+var _xhr = require('./model/xhr');
 
 var _xhr2 = _interopRequireDefault(_xhr);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _invoice3 = require('./view/invoice');
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
-var Template = function () {
-  function Template(clase) {
-    _classCallCheck(this, Template);
-
-    this.clase = clase;
-    this.list = [];
-    this.elements = {
-      div: "div",
-      p: "p"
-    };
-  }
-
-  _createClass(Template, [{
-    key: "addItem",
-    value: function addItem(listItem) {
-      this.list.push(listItem);
-    }
-  }]);
-
-  return Template;
-}();
-
-var tpl = new Template('tpl');
-
-tpl.addItem('elements');
-tpl.addItem('edcrece');
-tpl.addItem('kjlkjlkjlkjlkj');
-
-console.log(tpl);
-console.log(tpl.list);
-console.log(tpl.elements.div);
-
-// console.table(list());
-//
-// var divEl = document.addItemElement( 'div' );
-//
-// divEl.className = 'div_el';
-//
-//
-// console.table( template );
-// console.table( template.addItemElements( 'li' ) );
-
-// Invoice mini app
-
-
-// Objeto App
-
+// get Json data
 var xhr = new _xhr2.default({ json: true });
+// Import Views
 
-// Skills
+// Import Models
+
 xhr.send('../../data/content/skills.json').then(function (skills) {
-
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }
-  // DOM
-  var mainDiv = document.getElementById('main');
-  // mainDiv.innerHTML = templateSkills;
-  console.log(mainDiv);
+  console.log(skills);
 });
 
-// Works
-xhr.send('../../data/content/works.json').then(function (works) {
+// genera nueva instancia de Invoice
+var factura = new _invoice2.default();
 
-  console.log(works);
-  console.log(works[0].frontend);
-}, function (err) {
-  console.log('Joder error');
-});
+// Generate invoice
+function printInvoice(e) {
+  e.preventDefault;
+  // Pinta datos en el DOM
+  _invoice3.elIva.value = factura.calcIva();
+  _invoice3.elIrpf.value = factura.calcIrpf();
+  _invoice3.elTaxTotal.value = factura.calcTaxes();
+  _invoice3.elBaseImp.value = factura.calcBaseImp();
+  _invoice3.elTotal.value = factura.calcTotal();
+  // console.log( 'Tarea: ' + factura.getTask());
+  // console.log( 'Cantidad: ' + factura.getCantidad());
+  // console.log( 'Precio: ' + factura.getPrice());
+}
 
-},{"./components/invoice":2,"./xhr":3}],2:[function(require,module,exports){
+_invoice3.elBtnInvoice.addEventListener('click', printInvoice);
+// elBtnAddTask.addEventListener( 'click', addTask );
+// elBtnDelTask.addEventListener( 'click', delTask );
+
+},{"./model/invoice":2,"./model/xhr":3,"./view/invoice":4}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // MODEL models.js
 
@@ -170,55 +152,7 @@ var Invoice = function () {
   return Invoice;
 }();
 
-// CONTROLLER controllers.js
-
-// DOM Elements
-
-
-var elItems = document.querySelector('.items'),
-    elBaseImp = document.querySelector('.base_imp'),
-    elIva = document.querySelector('.iva'),
-    elIrpf = document.querySelector('.irpf'),
-    elTaxTotal = document.querySelector('.tax_total'),
-    elTotal = document.querySelector('.total'),
-    elTaskRow = document.querySelector('.invoice__row'),
-    elBtnAddTask = document.querySelector('.btn-add'),
-    elBtnDelTask = document.querySelector('.btn-delete'),
-    elBtnInvoice = document.querySelector('.btn-invoice');
-
-var factura = new Invoice();
-
-// Generate invoice
-function printInvoice(e) {
-  e.preventDefault;
-  // Pinta datos en el DOM
-  elIva.value = factura.calcIva();
-  elIrpf.value = factura.calcIrpf();
-  elTaxTotal.value = factura.calcTaxes();
-  elBaseImp.value = factura.calcBaseImp();
-  elTotal.value = factura.calcTotal();
-  // console.log( 'Tarea: ' + factura.getTask());
-  // console.log( 'Cantidad: ' + factura.getCantidad());
-  // console.log( 'Precio: ' + factura.getPrice());
-}
-
-// Print new task
-function addTask(e) {
-  e.preventDefault;
-  factura.addTask(factura.getTask());
-  console.log(factura.tasks);
-  console.log(elTaskRow);
-}
-
-// Delete Task
-function delTask(e) {
-  e.preventDefault;
-  factura.delTask(factura.getTask());
-}
-
-elBtnInvoice.addEventListener('click', printInvoice);
-elBtnAddTask.addEventListener('click', addTask);
-elBtnDelTask.addEventListener('click', delTask);
+exports.default = Invoice;
 
 },{}],3:[function(require,module,exports){
 'use strict';
@@ -362,5 +296,24 @@ var Xhr = function () {
 }();
 
 exports.default = Xhr;
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// DOM Elements
+var elItems = exports.elItems = document.querySelector('.items');
+var elBaseImp = exports.elBaseImp = document.querySelector('.base_imp');
+var elIva = exports.elIva = document.querySelector('.iva');
+var elIrpf = exports.elIrpf = document.querySelector('.irpf');
+var elPrecio = exports.elPrecio = document.querySelector('.precio');
+var elTaxTotal = exports.elTaxTotal = document.querySelector('.tax_total');
+var elTotal = exports.elTotal = document.querySelector('.total');
+var elTaskRow = exports.elTaskRow = document.querySelector('.invoice__row');
+var elBtnAddTask = exports.elBtnAddTask = document.querySelector('.btn-add');
+var elBtnDelTask = exports.elBtnDelTask = document.querySelector('.btn-delete');
+var elBtnInvoice = exports.elBtnInvoice = document.querySelector('.btn-invoice');
 
 },{}]},{},[1]);

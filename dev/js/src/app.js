@@ -1,83 +1,36 @@
 
+// Import Models
+import Invoice from './model/invoice';
+import Xhr from './model/xhr';
+// Import Views
+import { elItems, elPrecio, elBaseImp, elIva, elIrpf, elTaxTotal, elTotal, elTaskRow, elBtnAddTask, elBtnDelTask, elBtnInvoice } from './view/invoice';
 
-
-
-class Template {
-
-  constructor( clase ) {
-    this.clase = clase;
-    this.list = [];
-    this.elements = {
-      div: "div",
-      p: "p",
-    };
-  }
-
-  addItem(listItem) {
-    this.list.push(listItem);
-  }
-
-}
-
-let tpl = new Template( 'tpl' );
-
-tpl.addItem( 'elements' );
-tpl.addItem( 'edcrece' );
-tpl.addItem( 'kjlkjlkjlkjlkj' );
-
-
-console.log( tpl );
-console.log( tpl.list );
-console.log( tpl.elements.div );
-
-// console.table(list());
-//
-// var divEl = document.addItemElement( 'div' );
-//
-// divEl.className = 'div_el';
-//
-//
-// console.table( template );
-// console.table( template.addItemElements( 'li' ) );
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Invoice mini app
-import './components/invoice';
-
-// Objeto App
-import Xhr from './xhr';
+// get Json data
 var xhr = new Xhr( { json: true } );
-
-// Skills
-xhr.send( '../../data/content/skills.json' )
-.then( function (skills) {
-
+xhr.send( '../../data/content/skills.json' ).then( function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }
-  // DOM
-  let mainDiv = document.getElementById('main');
-  // mainDiv.innerHTML = templateSkills;
-  console.log(mainDiv);
-
+  console.log(skills);
 });
 
-// Works
-xhr.send( '../../data/content/works.json' )
-.then( function(works) {
+// genera nueva instancia de Invoice
+var factura = new Invoice();
 
-  console.log(works);
-  console.log(works[0].frontend);
+// Generate invoice
+function printInvoice(e) {
+  e.preventDefault;
+  // Pinta datos en el DOM
+  elIva.value       =   factura.calcIva();
+  elIrpf.value      =   factura.calcIrpf();
+  elTaxTotal.value  =   factura.calcTaxes();
+  elBaseImp.value   =   factura.calcBaseImp();
+  elTotal.value     =   factura.calcTotal();
+  // console.log( 'Tarea: ' + factura.getTask());
+  // console.log( 'Cantidad: ' + factura.getCantidad());
+  // console.log( 'Precio: ' + factura.getPrice());
+}
 
-},function(err){ console.log('Joder error'); });
+elBtnInvoice.addEventListener( 'click', printInvoice );
+// elBtnAddTask.addEventListener( 'click', addTask );
+// elBtnDelTask.addEventListener( 'click', delTask );
