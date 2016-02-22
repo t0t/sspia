@@ -7,7 +7,7 @@ import { elItems, elPrecio, elBaseImp, elIva, elIrpf, elTaxTotal, elTotal, elTas
 
 // get Json data
 var xhr = new Xhr( { json: true } );
-xhr.send( '../../data/content/skills.json' ).then( function (skills) {
+xhr.send( 'data/content/skills.json' ).then( function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }

@@ -44,6 +44,22 @@ gulp.task( 'img', function () {
 });
 
 /*
+  Icons
+*/
+gulp.task( 'icons', function () {
+  gulp.src( './dev/icons/*.svg' )
+    .pipe( gulp.dest( './prod/icons' ) )
+});
+
+/*
+  Data
+*/
+gulp.task( 'data', function () {
+  gulp.src( './dev/data/' )
+    .pipe( gulp.dest( './prod/data/' ) )
+});
+
+/*
   html
 */
 gulp.task( 'html', function() {
@@ -119,7 +135,7 @@ gulp.task('build', [ 'sass', 'js', 'html' ]);
 /*
   Deploy to Github
 */
-gulp.task( 'deploy', [ 'minicss','minijs','html', 'img' ], function () {
+gulp.task( 'deploy', [ 'minicss','minijs','html', 'img', 'icons', 'data' ], function () {
   return gulp.src( './prod/**/*' )
     .pipe( ghPages() );
 });

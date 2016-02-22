@@ -21,7 +21,7 @@ var xhr = new _xhr2.default({ json: true });
 
 // Import Models
 
-xhr.send('../../data/content/skills.json').then(function (skills) {
+xhr.send('data/content/skills.json').then(function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }
