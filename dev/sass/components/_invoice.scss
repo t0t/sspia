@@ -11,10 +11,14 @@
 }
 
 .invoice__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
-  margin-top: $padding-base;
-  margin-bottom: $padding-base;
-  line-height: 2.5;
+  height: $padding-base * 2;
+  margin-top: $padding-base * 2;
+  margin-bottom: $padding-base * 2;
   text-align: center;
   // background-color: $color-white;
   border: 1px dotted $color-black;
@@ -43,7 +47,7 @@
 }
 
 input[class="invoice__number"],
-input[class="invoice__date"] { 
+input[class="invoice__date"] {
   width: 100px;
 }
 input[class="task"] {

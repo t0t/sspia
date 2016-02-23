@@ -124,10 +124,22 @@ input[type="week"] {
   flex-wrap: wrap; }
 
 .invoice__row {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  line-height: 2.5;
+  height: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   text-align: center;
   border: 1px dotted black; }
 

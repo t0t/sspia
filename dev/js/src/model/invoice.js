@@ -7,9 +7,8 @@ class Invoice {
   }
 
   getTask() {
-    let elTask = document.querySelector( '.task' );
-    let task = elTask.value;
-    return task;
+    let elTask = document.querySelector( '.task' ).value;
+    return elTask;
   }
 
   addTask(task) {
@@ -21,15 +20,13 @@ class Invoice {
   }
 
   getCantidad() {
-    let elCantidad = document.querySelector( '.cantidad' );
-    let cantidad = elCantidad.value;
-    return cantidad;
+    let elCantidad = document.querySelector( '.cantidad' ).value;
+    return elCantidad;
   }
 
   getPrice() {
-    let elPrecio = document.querySelector( '.precio' );
-    let precio = elPrecio.value;
-    return precio;
+    let elPrecio = document.querySelector( '.precio' ).value;
+    return elPrecio;
   }
 
   calcIva() {

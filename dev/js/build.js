@@ -85,9 +85,8 @@ var Invoice = function () {
   _createClass(Invoice, [{
     key: 'getTask',
     value: function getTask() {
-      var elTask = document.querySelector('.task');
-      var task = elTask.value;
-      return task;
+      var elTask = document.querySelector('.task').value;
+      return elTask;
     }
   }, {
     key: 'addTask',
@@ -102,16 +101,14 @@ var Invoice = function () {
   }, {
     key: 'getCantidad',
     value: function getCantidad() {
-      var elCantidad = document.querySelector('.cantidad');
-      var cantidad = elCantidad.value;
-      return cantidad;
+      var elCantidad = document.querySelector('.cantidad').value;
+      return elCantidad;
     }
   }, {
     key: 'getPrice',
     value: function getPrice() {
-      var elPrecio = document.querySelector('.precio');
-      var precio = elPrecio.value;
-      return precio;
+      var elPrecio = document.querySelector('.precio').value;
+      return elPrecio;
     }
   }, {
     key: 'calcIva',
