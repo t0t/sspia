@@ -1,0 +1,6 @@
+.btn-invoice,
+.btn-print,
+.btn-delete,
+.btn-add {
+  @media print { display: none; }
+}

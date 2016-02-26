@@ -85,7 +85,7 @@ class Xhr {
         var query = [];
         if(((typeof data).toLowerCase()=='string') || (typeof data).toLowerCase()=='number') {
             query.push(data);
-        }else {
+        } else {
             for (var key in data) {
                 query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
             }

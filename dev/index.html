@@ -37,23 +37,7 @@
 
     <main class="invoiceApp">
 
-      <div class="invoice__row">
-
-        <input type="text" class="task" name="description" value="" placeholder="Tarea">
-        <input type="number" class="precio" name="precio" step="0.01" value="" placeholder="Precio">
-        <input type="number" class="cantidad" name="cantidad" step="1" value="" placeholder="Cantidad/Horas">
-
-        <select name="impuesto" class="hayImpuestos">
-          <option value="no">Sin impuestos</option>
-          <option value="si">IVA, IRPF</option>
-        </select>
-
-        <button class="btn-delete" type="button" name="button"> Eliminar (X) </button>
-        <button class="btn-add" type="button" name="button"> Añadir tarea (+) </button>
-
-      </div>
-
-      <div class="invoice__results">
+      <!-- <div class="invoice__results">
         <div class="invoice__taxes">
           <fieldset>
             <label for="iva">21% IVA:</label>
@@ -66,7 +50,7 @@
         </div>
 
         <fieldset>
-          <label for="baseimp">Base Imponible:</label>
+          <label for="baseimp">Total Tarea:</label>
           <input type="number" class="base_imp" name="baseimp" step="1" value="">
         </fieldset>
 
@@ -75,15 +59,26 @@
           <input type="number" class="total" name="eltotal" step="1" value=""> €
         </fieldset>
 
-        <button class="btn-invoice" type="button" name="button">Generar</button>
-        <button class="btn-print" type="button" name="button">Imprimir</button>
-
-      </div>
+      </div> -->
 
     </main>
 
 
-    <footer class="site__footer">SF Studio</footer>
+    <footer class="site__footer">
+      <input class="tarea" type="text" value="tarea1" placeholder="tarea">
+      <input class="cantidad" type="number" value="" placeholder="cantidad">
+      <input class="precio" type="number" value="" placeholder="precio">
+      <select class="impuestos" name="impuesto">
+        <option value="1">IVA, IRPF</option>
+        <option value="0">Sin impuestos</option>
+      </select>
+      <input class="btn-add" type="button" value="Añadir tarea +" />
+      <input class="btn-del" type="button" value="eliminar tarea -" />
+      <button class="btn-invoice" type="button" name="button">Generar</button>
+      <button class="btn-print" type="button" name="button">Imprimir</button>
+      <button class="btn-delete" type="button" name="button"> (X) </button>
+      <button class="btn-add" type="button" name="button"> (+) </button>
+    </footer>
 
     <!-- The JavaScript build. -->
     <script src="js/build.js"></script>

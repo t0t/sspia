@@ -8,6 +8,9 @@ body {
   font-size: 100%;
   padding: $padding-base;
   background-color: $color-white;
+  @media print {
+    padding: 0;
+  }
 }
 
 p {

@@ -7,6 +7,9 @@ body {
   font-size: 100%;
   padding: 25px;
   background-color: rgba(255, 255, 255, 0.2); }
+  @media print {
+    body {
+      padding: 0; } }
 
 p {
   font-size: 90%;
@@ -109,6 +112,13 @@ input[type="week"] {
   padding-top: 12.5px;
   padding-bottom: 12.5px; }
 
+@media print {
+  .btn-invoice,
+  .btn-print,
+  .btn-delete,
+  .btn-add {
+    display: none; } }
+
 .invoiceApp {
   -webkit-align-self: flex-end;
   -ms-flex-item-align: end;
@@ -138,10 +148,12 @@ input[type="week"] {
   align-items: center;
   width: 100%;
   height: 50px;
-  margin-top: 50px;
-  margin-bottom: 50px;
   text-align: center;
-  border: 1px dotted black; }
+  border-top: 1px dotted black;
+  border-left: 1px dotted black;
+  border-right: 1px dotted black; }
+  .invoice__row:last-child {
+    border-bottom: 1px dotted black; }
 
 .invoice__id {
   display: -webkit-flex;

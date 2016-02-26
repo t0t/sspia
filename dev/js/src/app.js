@@ -1,9 +1,9 @@
-
 // Import Models
 import Invoice from './model/invoice';
+import Task from './model/task';
+// import Task from './model/task';
 import Xhr from './model/xhr';
-// Import Views
-import { elItems, elPrecio, elBaseImp, elIva, elIrpf, elTaxTotal, elTotal, elTaskRow, elBtnAddTask, elBtnDelTask, elBtnInvoice } from './view/invoice';
+import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, removeTask, printTask, printTaxes } from './view/invoice';
 
 // get Json data
 var xhr = new Xhr( { json: true } );
@@ -14,23 +14,60 @@ xhr.send( 'data/content/skills.json' ).then( function (skills) {
   console.log(skills);
 });
 
-// genera nueva instancia de Invoice
-var factura = new Invoice();
 
-// Generate invoice
-function printInvoice(e) {
-  e.preventDefault;
-  // Pinta datos en el DOM
-  elIva.value       =   factura.calcIva();
-  elIrpf.value      =   factura.calcIrpf();
-  elTaxTotal.value  =   factura.calcTaxes();
-  elBaseImp.value   =   factura.calcBaseImp();
-  elTotal.value     =   factura.calcTotal();
-  // console.log( 'Tarea: ' + factura.getTask());
-  // console.log( 'Cantidad: ' + factura.getCantidad());
-  // console.log( 'Precio: ' + factura.getPrice());
+// Controller Interaccion entre -dom y la logica
+// let newTaskEl = document.querySelector('.btn-add');
+// let taskList = document.querySelector('.invoice__row');
+
+let invoice = new Invoice();
+let iva = 21;
+let irpf= 15;
+let total = 0;
+
+function addTask() {
+  let taskValue = elInputTarea.value;
+  let newTask = new Task(taskValue);
+  invoice.addTask(newTask);
+  newTask.datos.cantidad = elInputCantidad.value * 1;
+  newTask.datos.precio = elInputPrecio.value * 1;
+  newTask.datos.baseImp = elInputPrecio.value * elInputCantidad.value;
+  total =+ newTask.datos.baseImp;
+  if (elSelectTaxes[0].selected === true) {
+  }
+  printTask();
+  console.log(newTask);
+  console.table(newTask.datos);
 }
 
+// View
+// Generate invoice
+function printInvoice (e) {
+  e.preventDefault;
+  console.log(invoice.tasks);
+  let value;
+  for (var i = 0; i < invoice.tasks.length; i++) {
+    value = invoice.tasks[i].datos.baseImp;
+    total + value;
+    console.log(total + value);
+  }
+  elIva.value       =   factura.calcIva();
+  // elIrpf.value      =   factura.calcIrpf();
+  // elTaxTotal.value  =   factura.calcTaxes();
+  // elBaseImp.value   =   factura.calcBaseImp();
+  // elTotal.value     =   factura.calcTotal();
+}
+
+// Print screen to pdf
+function printPdf(e) {
+  e.preventDefault;
+  window.print();
+}
+
+elBtnPrint.addEventListener( 'click', printPdf );
+elBtnDelTask.addEventListener( 'click', removeTask );
+elBtnAddTask.addEventListener( 'click', addTask );
 elBtnInvoice.addEventListener( 'click', printInvoice );
-// elBtnAddTask.addEventListener( 'click', addTask );
-// elBtnDelTask.addEventListener( 'click', delTask );
+
+console.log(invoice.tasks);
+console.log(invoice);
+console.clear();

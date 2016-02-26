@@ -5,6 +5,10 @@ var _invoice = require('./model/invoice');
 
 var _invoice2 = _interopRequireDefault(_invoice);
 
+var _task = require('./model/task');
+
+var _task2 = _interopRequireDefault(_task);
+
 var _xhr = require('./model/xhr');
 
 var _xhr2 = _interopRequireDefault(_xhr);
@@ -16,11 +20,10 @@ function _interopRequireDefault(obj) {
 }
 
 // get Json data
-var xhr = new _xhr2.default({ json: true });
-// Import Views
 
+// import Task from './model/task';
 // Import Models
-
+var xhr = new _xhr2.default({ json: true });
 xhr.send('data/content/skills.json').then(function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
@@ -28,121 +31,98 @@ xhr.send('data/content/skills.json').then(function (skills) {
   console.log(skills);
 });
 
-// genera nueva instancia de Invoice
-var factura = new _invoice2.default();
+// Controller Interaccion entre -dom y la logica
+// let newTaskEl = document.querySelector('.btn-add');
+// let taskList = document.querySelector('.invoice__row');
 
+var invoice = new _invoice2.default();
+var iva = 21;
+var irpf = 15;
+var total = 0;
+
+function addTask() {
+  var taskValue = _invoice3.elInputTarea.value;
+  var newTask = new _task2.default(taskValue);
+  invoice.addTask(newTask);
+  newTask.datos.cantidad = _invoice3.elInputCantidad.value * 1;
+  newTask.datos.precio = _invoice3.elInputPrecio.value * 1;
+  newTask.datos.baseImp = _invoice3.elInputPrecio.value * _invoice3.elInputCantidad.value;
+  total = +newTask.datos.baseImp;
+  if (_invoice3.elSelectTaxes[0].selected === true) {}
+  (0, _invoice3.printTask)();
+  console.log(newTask);
+  console.table(newTask.datos);
+}
+
+// View
 // Generate invoice
 function printInvoice(e) {
   e.preventDefault;
-  // Pinta datos en el DOM
-  _invoice3.elIva.value = factura.calcIva();
-  _invoice3.elIrpf.value = factura.calcIrpf();
-  _invoice3.elTaxTotal.value = factura.calcTaxes();
-  _invoice3.elBaseImp.value = factura.calcBaseImp();
-  _invoice3.elTotal.value = factura.calcTotal();
-  // console.log( 'Tarea: ' + factura.getTask());
-  // console.log( 'Cantidad: ' + factura.getCantidad());
-  // console.log( 'Precio: ' + factura.getPrice());
+  console.log(invoice.tasks);
+  var value = undefined;
+  for (var i = 0; i < invoice.tasks.length; i++) {
+    value = invoice.tasks[i].datos.baseImp;
+    total + value;
+    console.log(total + value);
+  }
+  elIva.value = factura.calcIva();
+  // elIrpf.value      =   factura.calcIrpf();
+  // elTaxTotal.value  =   factura.calcTaxes();
+  // elBaseImp.value   =   factura.calcBaseImp();
+  // elTotal.value     =   factura.calcTotal();
 }
 
-_invoice3.elBtnInvoice.addEventListener('click', printInvoice);
-// elBtnAddTask.addEventListener( 'click', addTask );
-// elBtnDelTask.addEventListener( 'click', delTask );
+// Print screen to pdf
+function printPdf(e) {
+  e.preventDefault;
+  window.print();
+}
 
-},{"./model/invoice":2,"./model/xhr":3,"./view/invoice":4}],2:[function(require,module,exports){
-'use strict';
+_invoice3.elBtnPrint.addEventListener('click', printPdf);
+_invoice3.elBtnDelTask.addEventListener('click', _invoice3.removeTask);
+_invoice3.elBtnAddTask.addEventListener('click', addTask);
+_invoice3.elBtnInvoice.addEventListener('click', printInvoice);
+
+console.log(invoice.tasks);
+console.log(invoice);
+console.clear();
+
+},{"./model/invoice":2,"./model/task":3,"./model/xhr":4,"./view/invoice":5}],2:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // MODEL models.js
 
 var Invoice = function () {
-  function Invoice(name) {
+  function Invoice() {
     _classCallCheck(this, Invoice);
 
-    this.name = name;
     this.tasks = [];
+    // this.iva = 21;
+    // this.irpf = 15;
   }
 
   _createClass(Invoice, [{
-    key: 'getTask',
-    value: function getTask() {
-      var elTask = document.querySelector('.task').value;
-      return elTask;
+    key: "calcTotal",
+    value: function calcTotal() {
+      //calc el total
     }
   }, {
-    key: 'addTask',
+    key: "calcTax",
+    value: function calcTax() {
+      //calc el iva
+    }
+  }, {
+    key: "addTask",
     value: function addTask(task) {
       this.tasks.push(task);
-    }
-  }, {
-    key: 'delTask',
-    value: function delTask(task) {
-      this.tasks.push(task);
-    }
-  }, {
-    key: 'getCantidad',
-    value: function getCantidad() {
-      var elCantidad = document.querySelector('.cantidad').value;
-      return elCantidad;
-    }
-  }, {
-    key: 'getPrice',
-    value: function getPrice() {
-      var elPrecio = document.querySelector('.precio').value;
-      return elPrecio;
-    }
-  }, {
-    key: 'calcIva',
-    value: function calcIva() {
-      var iva = this.calcBaseImp() * 21 / 100;
-      return iva; // cantidad que se suma al imponible
-    }
-  }, {
-    key: 'calcIrpf',
-    value: function calcIrpf() {
-      var irpf = this.calcBaseImp() * 15 / 100;
-      return irpf; // cantidad que se resta al iva
-    }
-  }, {
-    key: 'calcTaxes',
-    value: function calcTaxes() {
-      var taxed = document.querySelector('.hayImpuestos').children;
-      var taxes = 0;
-      if (taxed[0].selected === false) {
-        taxes = this.calcIva() - this.calcIrpf();
-      }
-      return taxes; // si es true: cantidad a sumar a la vase imponible
-    }
-  }, {
-    key: 'calcBaseImp',
-    value: function calcBaseImp() {
-      var baseImp = this.getCantidad() * this.getPrice();
-      return baseImp;
-    }
-  }, {
-    key: 'calcTotal',
-    value: function calcTotal() {
-      var total = this.calcBaseImp() + this.calcTaxes();
-      return total;
     }
   }]);
 
@@ -152,6 +132,26 @@ var Invoice = function () {
 exports.default = Invoice;
 
 },{}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// Tareas
+
+var Task = function Task(name) {
+  _classCallCheck(this, Task);
+
+  this.name = name;
+  this.datos = {};
+};
+
+exports.default = Task;
+
+},{}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -294,23 +294,47 @@ var Xhr = function () {
 
 exports.default = Xhr;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// DOM Elements
-var elItems = exports.elItems = document.querySelector('.items');
-var elBaseImp = exports.elBaseImp = document.querySelector('.base_imp');
-var elIva = exports.elIva = document.querySelector('.iva');
-var elIrpf = exports.elIrpf = document.querySelector('.irpf');
-var elPrecio = exports.elPrecio = document.querySelector('.precio');
-var elTaxTotal = exports.elTaxTotal = document.querySelector('.tax_total');
-var elTotal = exports.elTotal = document.querySelector('.total');
-var elTaskRow = exports.elTaskRow = document.querySelector('.invoice__row');
-var elBtnAddTask = exports.elBtnAddTask = document.querySelector('.btn-add');
+exports.printTask = printTask;
+
+// IMPRIMIR DATOS EN EL DOM
+var elMain = exports.elMain = document.querySelector('.invoiceApp');
+var elInputTarea = exports.elInputTarea = document.querySelector('.tarea');
+var elInputCantidad = exports.elInputCantidad = document.querySelector('.cantidad');
+var elSelectTaxes = exports.elSelectTaxes = document.getElementsByTagName('option');
+var elInputPrecio = exports.elInputPrecio = document.querySelector('.precio');
 var elBtnDelTask = exports.elBtnDelTask = document.querySelector('.btn-delete');
+var elBtnAddTask = exports.elBtnAddTask = document.querySelector('.btn-add');
 var elBtnInvoice = exports.elBtnInvoice = document.querySelector('.btn-invoice');
+var elBtnPrint = exports.elBtnPrint = document.querySelector('.btn-print');
+
+function printTask() {
+  var baseImp = elInputPrecio.value * elInputCantidad.value;
+  var outPut = document.createElement('div');
+  outPut.className = 'invoice__row';
+  outPut.innerHTML = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>:</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
+  elMain.appendChild(outPut);
+}
+// export function printTaxes() {
+//   // if (elSelectTaxes[0].selected === true) {
+//   //   // let isTaxed = document.createElement( 'div' );
+//   //   // isTaxed.className = 'invoice__taxes';
+//   //   // isTaxed.innerHTML = `
+//   //   // <p>21% Iva -15% Irpf</p>
+//   //   // <p>Taxes: ${(elInputPrecio.value * elInputCantidad.value)}€</p>
+//   //   // `;
+//   //   // elMain.appendChild(isTaxed);
+//   // }
+// }
+
+function removeTask() {
+  var remove = document.querySelector('.output');
+  elMain.appendChild(remove);
+}
 
 },{}]},{},[1]);

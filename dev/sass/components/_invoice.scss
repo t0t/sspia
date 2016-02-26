@@ -1,9 +1,5 @@
 
 .invoiceApp {
-  // height: 200px;
-  // padding: $padding-base;
-  // background-color: $color-white;
-
   align-self: flex-end;
   justify-content: flex-end;
   display: flex;
@@ -17,11 +13,16 @@
   align-items: center;
   width: 100%;
   height: $padding-base * 2;
-  margin-top: $padding-base * 2;
-  margin-bottom: $padding-base * 2;
+  // margin-top: $padding-base / 2;
+  // margin-bottom: $padding-base / 2;
   text-align: center;
   // background-color: $color-white;
-  border: 1px dotted $color-black;
+  border-top: 1px dotted $color-black;
+  border-left: 1px dotted $color-black;
+  border-right: 1px dotted $color-black;
+  &:last-child {
+    border-bottom: 1px dotted $color-black;
+  }
 }
 
 .invoice__id {
