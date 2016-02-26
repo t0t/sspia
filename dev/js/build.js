@@ -53,14 +53,17 @@ function addTask() {
   console.log(newTask);
   console.table(newTask.datos);
 }
-function removeTarea() {
+function removeTarea(e) {
+  // e.preventDefault;
   var rowEl = document.querySelector('.invoice__row');
   var taskList = _invoice3.elMain.children;
+  e.stopPropagation();
   for (var i = 0; i < taskList.length; i++) {
+    // var _i = i;
+    // invoice.removeTask(_i);
     taskList[i].remove();
   }
   console.log(taskList);
-  console.log('taskList');
 }
 // View
 // Generate invoice
@@ -98,9 +101,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // MODEL models.js
 
@@ -118,11 +133,10 @@ var Invoice = function () {
     value: function addTask(task) {
       this.tasks.push(task);
     }
-  }, {
-    key: "removeTask",
-    value: function removeTask(i) {
-      this.tasks.splice(i, 1);
-    }
+    // removeTask(i){
+    //   this.tasks.splice(i,1);
+    // }
+
   }]);
 
   return Invoice;

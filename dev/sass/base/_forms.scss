@@ -2,13 +2,20 @@
 label {
   display: inline-block;
 }
-
+button {
+  background-color: $color-alt;
+  border: none;
+  &:hover {
+    background-color: $color-black;
+    color: $color-alt;
+  }
+}
 input[type=text],
 input[type=number],
 input[type=date],
 select {
   font-size: 100%;
-  border: none;
+  border: 1px solid $color-alt;
   outline: none;
   background-color: transparent;
 }

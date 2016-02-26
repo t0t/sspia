@@ -38,14 +38,17 @@ function addTask() {
   console.log(newTask);
   console.table(newTask.datos);
 }
-function removeTarea() {
+function removeTarea(e) {
+  // e.preventDefault;
   let rowEl = document.querySelector('.invoice__row');
   let taskList = elMain.children;
+  e.stopPropagation();
   for (var i = 0; i < taskList.length; i++) {
+    // var _i = i;
+    // invoice.removeTask(_i);
     taskList[i].remove();
   }
   console.log(taskList);
-  console.log('taskList');
 }
 // View
 // Generate invoice

@@ -17,11 +17,11 @@
   // margin-bottom: $padding-base / 2;
   text-align: center;
   // background-color: $color-white;
-  border-top: 1px dotted $color-black;
-  border-left: 1px dotted $color-black;
-  border-right: 1px dotted $color-black;
+  border-top: 2px solid $color-gray;
+  border-left: 2px solid $color-gray;
+  border-right: 2px solid $color-gray;
   &:last-child {
-    border-bottom: 1px dotted $color-black;
+    border-bottom: 2px solid $color-gray;
   }
 }
 

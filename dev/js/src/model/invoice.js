@@ -8,8 +8,8 @@ class Invoice {
   addTask(task){
     this.tasks.push(task);
   }
-  removeTask(i){
-    this.tasks.splice(i,1);
-  }
+  // removeTask(i){
+  //   this.tasks.splice(i,1);
+  // }
 }
 export default Invoice;
