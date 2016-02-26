@@ -3,7 +3,7 @@ import Invoice from './model/invoice';
 import Task from './model/task';
 // import Task from './model/task';
 import Xhr from './model/xhr';
-import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, removeTask, printTask, printTaxes } from './view/invoice';
+import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, removeTask, printTaxes } from './view/invoice';
 
 // get Json data
 var xhr = new Xhr( { json: true } );
@@ -38,7 +38,12 @@ function addTask() {
   console.log(newTask);
   console.table(newTask.datos);
 }
-
+function removeTarea() {
+  let rowEl = document.querySelector('.invoice__row');
+  let taskList = elMain.children;
+  console.log(taskList);
+  console.log('taskList');
+}
 // View
 // Generate invoice
 function printInvoice (e) {
@@ -50,11 +55,7 @@ function printInvoice (e) {
     total + value;
     console.log(total + value);
   }
-  elIva.value       =   factura.calcIva();
-  // elIrpf.value      =   factura.calcIrpf();
-  // elTaxTotal.value  =   factura.calcTaxes();
-  // elBaseImp.value   =   factura.calcBaseImp();
-  // elTotal.value     =   factura.calcTotal();
+  // elIva.value       =   factura.calcIva();
 }
 
 // Print screen to pdf
@@ -64,8 +65,8 @@ function printPdf(e) {
 }
 
 elBtnPrint.addEventListener( 'click', printPdf );
-elBtnDelTask.addEventListener( 'click', removeTask );
 elBtnAddTask.addEventListener( 'click', addTask );
+elBtnDelTask.addEventListener( 'click', removeTarea );
 elBtnInvoice.addEventListener( 'click', printInvoice );
 
 console.log(invoice.tasks);

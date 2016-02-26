@@ -53,7 +53,12 @@ function addTask() {
   console.log(newTask);
   console.table(newTask.datos);
 }
-
+function removeTarea() {
+  var rowEl = document.querySelector('.invoice__row');
+  var taskList = _invoice3.elMain.children;
+  console.log(taskList);
+  console.log('taskList');
+}
 // View
 // Generate invoice
 function printInvoice(e) {
@@ -65,11 +70,7 @@ function printInvoice(e) {
     total + value;
     console.log(total + value);
   }
-  elIva.value = factura.calcIva();
-  // elIrpf.value      =   factura.calcIrpf();
-  // elTaxTotal.value  =   factura.calcTaxes();
-  // elBaseImp.value   =   factura.calcBaseImp();
-  // elTotal.value     =   factura.calcTotal();
+  // elIva.value       =   factura.calcIva();
 }
 
 // Print screen to pdf
@@ -79,8 +80,8 @@ function printPdf(e) {
 }
 
 _invoice3.elBtnPrint.addEventListener('click', printPdf);
-_invoice3.elBtnDelTask.addEventListener('click', _invoice3.removeTask);
 _invoice3.elBtnAddTask.addEventListener('click', addTask);
+_invoice3.elBtnDelTask.addEventListener('click', removeTarea);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
 console.log(invoice.tasks);
@@ -110,19 +111,14 @@ var Invoice = function () {
   }
 
   _createClass(Invoice, [{
-    key: "calcTotal",
-    value: function calcTotal() {
-      //calc el total
-    }
-  }, {
-    key: "calcTax",
-    value: function calcTax() {
-      //calc el iva
-    }
-  }, {
     key: "addTask",
     value: function addTask(task) {
       this.tasks.push(task);
+    }
+  }, {
+    key: "removeTask",
+    value: function removeTask(i) {
+      this.tasks.splice(i, 1);
     }
   }]);
 
@@ -308,7 +304,7 @@ var elInputTarea = exports.elInputTarea = document.querySelector('.tarea');
 var elInputCantidad = exports.elInputCantidad = document.querySelector('.cantidad');
 var elSelectTaxes = exports.elSelectTaxes = document.getElementsByTagName('option');
 var elInputPrecio = exports.elInputPrecio = document.querySelector('.precio');
-var elBtnDelTask = exports.elBtnDelTask = document.querySelector('.btn-delete');
+var elBtnDelTask = exports.elBtnDelTask = document.querySelector('.btn-del');
 var elBtnAddTask = exports.elBtnAddTask = document.querySelector('.btn-add');
 var elBtnInvoice = exports.elBtnInvoice = document.querySelector('.btn-invoice');
 var elBtnPrint = exports.elBtnPrint = document.querySelector('.btn-print');
@@ -319,22 +315,7 @@ function printTask() {
   outPut.className = 'invoice__row';
   outPut.innerHTML = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>:</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
   elMain.appendChild(outPut);
-}
-// export function printTaxes() {
-//   // if (elSelectTaxes[0].selected === true) {
-//   //   // let isTaxed = document.createElement( 'div' );
-//   //   // isTaxed.className = 'invoice__taxes';
-//   //   // isTaxed.innerHTML = `
-//   //   // <p>21% Iva -15% Irpf</p>
-//   //   // <p>Taxes: ${(elInputPrecio.value * elInputCantidad.value)}€</p>
-//   //   // `;
-//   //   // elMain.appendChild(isTaxed);
-//   // }
-// }
-
-function removeTask() {
-  var remove = document.querySelector('.output');
-  elMain.appendChild(remove);
+  // removeTask();
 }
 
 },{}]},{},[1]);
