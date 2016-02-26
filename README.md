@@ -9,6 +9,7 @@
   - JS/ES6
     - Modules
     - Classes
+    - MVC
   - CSS
   - SASS
     - Components
