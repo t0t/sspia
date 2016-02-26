@@ -3,7 +3,7 @@
 
 ![Screenshot](./screenshot.png)
 
-## Raw Standards
+## Raw Standards Only
 
   - HTML
   - JS/ES6
@@ -16,21 +16,26 @@
   - [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
   - JSON as "DB"
 
-## Development
+## Development workflow
 
  * Atom
  * Git
- * Gulp tasks & NPM:
+ * Gulp & NPM:
   - Deploy to gh-pages
   - Watch
   - Babel
   - BrowserSync
   - Autoprefixer
+  - Concat
+  - Minificado
 
 ## To Do
 
-- [ ] Añadir Tarea
-- [ ] Eliminar Tarea
-- [ ] Añadir Imprimir
+- [x] Añadir Tarea
+- [x] Eliminar Tarea
+- [x] Añadir Imprimir
 - [x] Select con impuestos o sin
 - [ ] JSON as Db
+- [ ] Añadir Rutas con page.js
+- [ ] Bugs
+- [ ] Refactorizado
