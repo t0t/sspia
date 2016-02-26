@@ -1,6 +1,12 @@
-.btn-invoice,
-.btn-print,
-.btn-delete,
-.btn-add {
-  @media print { display: none; }
+footer {
+  .btn-print,
+  .btn-invoice,
+  .btn-del,
+  .btn-add,
+  .impuestos,
+  .precio,
+  .cantidad,
+  .tarea {
+    @media print { display: none; }
+  }
 }

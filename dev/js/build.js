@@ -28,12 +28,10 @@ xhr.send('data/content/skills.json').then(function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }
-  console.log(skills);
+  // console.log(skills);
 });
 
 // Controller Interaccion entre -dom y la logica
-// let newTaskEl = document.querySelector('.btn-add');
-// let taskList = document.querySelector('.invoice__row');
 
 var invoice = new _invoice2.default();
 var iva = 21;
@@ -53,19 +51,16 @@ function addTask() {
   console.log(newTask);
   console.table(newTask.datos);
 }
-function removeTarea(e) {
-  // e.preventDefault;
+
+function removeTarea() {
   var rowEl = document.querySelector('.invoice__row');
   var taskList = _invoice3.elMain.children;
-  e.stopPropagation();
   for (var i = 0; i < taskList.length; i++) {
-    // var _i = i;
-    // invoice.removeTask(_i);
     taskList[i].remove();
   }
   console.log(taskList);
 }
-// View
+
 // Generate invoice
 function printInvoice(e) {
   e.preventDefault;
@@ -85,14 +80,15 @@ function printPdf(e) {
   window.print();
 }
 
+// Los 4 eventos click
 _invoice3.elBtnPrint.addEventListener('click', printPdf);
 _invoice3.elBtnAddTask.addEventListener('click', addTask);
 _invoice3.elBtnDelTask.addEventListener('click', removeTarea);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
-console.log(invoice.tasks);
-console.log(invoice);
 console.clear();
+console.table(invoice.tasks);
+console.log(invoice);
 
 },{"./model/invoice":2,"./model/task":3,"./model/xhr":4,"./view/invoice":5}],2:[function(require,module,exports){
 "use strict";
@@ -330,7 +326,7 @@ function printTask() {
   var baseImp = elInputPrecio.value * elInputCantidad.value;
   var outPut = document.createElement('div');
   outPut.className = 'invoice__row';
-  outPut.innerHTML = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>:</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
+  outPut.innerHTML = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>=</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
   elMain.appendChild(outPut);
   // removeTask();
 }

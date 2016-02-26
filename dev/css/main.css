@@ -26,6 +26,10 @@ button {
     background-color: black;
     color: pink; }
 
+input,
+button {
+  padding: 5px 8px; }
+
 input[type=text],
 input[type=number],
 input[type=date],
@@ -120,10 +124,14 @@ input[type="week"] {
   padding-bottom: 12.5px; }
 
 @media print {
-  .btn-invoice,
-  .btn-print,
-  .btn-delete,
-  .btn-add {
+  footer .btn-print,
+  footer .btn-invoice,
+  footer .btn-del,
+  footer .btn-add,
+  footer .impuestos,
+  footer .precio,
+  footer .cantidad,
+  footer .tarea {
     display: none; } }
 
 .invoiceApp {

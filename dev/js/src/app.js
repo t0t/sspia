@@ -11,13 +11,10 @@ xhr.send( 'data/content/skills.json' ).then( function (skills) {
   for (var i = 0; i < skills[0].tools.length; i++) {
     skills[0].tools[i];
   }
-  console.log(skills);
+  // console.log(skills);
 });
 
-
 // Controller Interaccion entre -dom y la logica
-// let newTaskEl = document.querySelector('.btn-add');
-// let taskList = document.querySelector('.invoice__row');
 
 let invoice = new Invoice();
 let iva = 21;
@@ -32,25 +29,21 @@ function addTask() {
   newTask.datos.precio = elInputPrecio.value * 1;
   newTask.datos.baseImp = elInputPrecio.value * elInputCantidad.value;
   total =+ newTask.datos.baseImp;
-  if (elSelectTaxes[0].selected === true) {
-  }
+  if (elSelectTaxes[0].selected === true) {}
   printTask();
   console.log(newTask);
   console.table(newTask.datos);
 }
-function removeTarea(e) {
-  // e.preventDefault;
+
+function removeTarea() {
   let rowEl = document.querySelector('.invoice__row');
   let taskList = elMain.children;
-  e.stopPropagation();
   for (var i = 0; i < taskList.length; i++) {
-    // var _i = i;
-    // invoice.removeTask(_i);
     taskList[i].remove();
   }
   console.log(taskList);
 }
-// View
+
 // Generate invoice
 function printInvoice (e) {
   e.preventDefault;
@@ -70,11 +63,12 @@ function printPdf(e) {
   window.print();
 }
 
+// Los 4 eventos click
 elBtnPrint.addEventListener( 'click', printPdf );
 elBtnAddTask.addEventListener( 'click', addTask );
 elBtnDelTask.addEventListener( 'click', removeTarea );
 elBtnInvoice.addEventListener( 'click', printInvoice );
 
-console.log(invoice.tasks);
-console.log(invoice);
 console.clear();
+console.table(invoice.tasks);
+console.log(invoice);

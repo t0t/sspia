@@ -10,6 +10,10 @@ button {
     color: $color-alt;
   }
 }
+input,
+button {
+  padding: 5px 8px;
+}
 input[type=text],
 input[type=number],
 input[type=date],

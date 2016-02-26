@@ -19,7 +19,7 @@ export function printTask() {
     <p>${elInputCantidad.value} horas</p>
     <p>x</p>
     <p>${elInputPrecio.value}€</p>
-    <p>:</p>
+    <p>=</p>
     <p data-valor="${baseImp}">${baseImp}€</p>
   `;
   elMain.appendChild(outPut);
