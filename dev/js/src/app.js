@@ -41,6 +41,9 @@ function addTask() {
 function removeTarea() {
   let rowEl = document.querySelector('.invoice__row');
   let taskList = elMain.children;
+  for (var i = 0; i < taskList.length; i++) {
+    taskList[i].remove();
+  }
   console.log(taskList);
   console.log('taskList');
 }
