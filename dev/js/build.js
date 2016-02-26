@@ -19,25 +19,19 @@ function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
-// get Json data
+// Creamos la instancia de la clase Invoice
 
 // import Task from './model/task';
-// Import Models
-var xhr = new _xhr2.default({ json: true });
-xhr.send('data/content/skills.json').then(function (skills) {
-  for (var i = 0; i < skills[0].tools.length; i++) {
-    skills[0].tools[i];
-  }
-  // console.log(skills);
-});
-
 // Controller Interaccion entre -dom y la logica
-
+// Import Models
 var invoice = new _invoice2.default();
-var iva = 21;
-var irpf = 15;
-var total = 0;
 
+// Variables globales
+var iva = 21,
+    irpf = 15,
+    total = 0;
+
+// Añadir tarea
 function addTask() {
   var taskValue = _invoice3.elInputTarea.value;
   var newTask = new _task2.default(taskValue);
@@ -46,12 +40,15 @@ function addTask() {
   newTask.datos.precio = _invoice3.elInputPrecio.value * 1;
   newTask.datos.baseImp = _invoice3.elInputPrecio.value * _invoice3.elInputCantidad.value;
   total = +newTask.datos.baseImp;
-  if (_invoice3.elSelectTaxes[0].selected === true) {}
+  if (_invoice3.elSelectTaxes[0].selected === true) {
+    var taxes = 56;
+    invoice.calcTaxes(taxes);
+  }
   (0, _invoice3.printTask)();
   console.log(newTask);
-  console.table(newTask.datos);
 }
 
+// Eliminar tarea
 function removeTarea() {
   var rowEl = document.querySelector('.invoice__row');
   var taskList = _invoice3.elMain.children;
@@ -61,17 +58,14 @@ function removeTarea() {
   console.log(taskList);
 }
 
-// Generate invoice
-function printInvoice(e) {
-  e.preventDefault;
-  console.log(invoice.tasks);
-  var value = undefined;
-  for (var i = 0; i < invoice.tasks.length; i++) {
-    value = invoice.tasks[i].datos.baseImp;
-    total + value;
-    console.log(total + value);
-  }
-  // elIva.value       =   factura.calcIva();
+// Generar factura
+function printInvoice() {
+  var arr = invoice.tasks;
+  var totalImps = 0;
+  arr.forEach(function (pilla) {
+    totalImps += pilla.datos.baseImp;
+  });
+  invoice.totalImps(totalImps);
 }
 
 // Print screen to pdf
@@ -86,9 +80,18 @@ _invoice3.elBtnAddTask.addEventListener('click', addTask);
 _invoice3.elBtnDelTask.addEventListener('click', removeTarea);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
-console.clear();
 console.table(invoice.tasks);
+console.log(invoice.tasks.datos);
 console.log(invoice);
+
+// get Json data
+// var xhr = new Xhr( { json: true } );
+// xhr.send( 'data/content/skills.json' ).then( function (skills) {
+//   for (var i = 0; i < skills[0].tools.length; i++) {
+//     skills[0].tools[i];
+//   }
+//   // console.log(skills);
+// });
 
 },{"./model/invoice":2,"./model/task":3,"./model/xhr":4,"./view/invoice":5}],2:[function(require,module,exports){
 "use strict";
@@ -120,14 +123,22 @@ var Invoice = function () {
     _classCallCheck(this, Invoice);
 
     this.tasks = [];
-    // this.iva = 21;
-    // this.irpf = 15;
   }
 
   _createClass(Invoice, [{
     key: "addTask",
     value: function addTask(task) {
       this.tasks.push(task);
+    }
+  }, {
+    key: "totalImps",
+    value: function totalImps(total) {
+      console.log("\n      El total sin impuestos es:\n      " + total + "\n      ");
+    }
+  }, {
+    key: "calcTaxes",
+    value: function calcTaxes(taxes) {
+      console.log("\n      Los impuestos son:\n      " + taxes + "\n      ");
     }
     // removeTask(i){
     //   this.tasks.splice(i,1);
@@ -147,7 +158,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // Tareas
 
@@ -156,6 +171,7 @@ var Task = function Task(name) {
 
   this.name = name;
   this.datos = {};
+  // this.is_taxed = false;
 };
 
 exports.default = Task;
@@ -163,15 +179,39 @@ exports.default = Task;
 },{}],4:[function(require,module,exports){
 'use strict';
 
+var _typeof3 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
+};
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
+    return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+} : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
+};
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
 /**
  * XmlHttpRequest for you es6 project. Required features only.
@@ -310,6 +350,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.printTask = printTask;
+exports.printTotals = printTotals;
 
 // IMPRIMIR DATOS EN EL DOM
 var elMain = exports.elMain = document.querySelector('.invoiceApp');
@@ -330,5 +371,7 @@ function printTask() {
   elMain.appendChild(outPut);
   // removeTask();
 }
+
+function printTotals() {}
 
 },{}]},{},[1]);

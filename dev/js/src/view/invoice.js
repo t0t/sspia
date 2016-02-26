@@ -25,3 +25,5 @@ export function printTask() {
   elMain.appendChild(outPut);
   // removeTask();
 }
+
+export function printTotals() {}

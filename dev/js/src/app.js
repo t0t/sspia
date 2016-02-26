@@ -1,26 +1,20 @@
+// Controller Interaccion entre -dom y la logica
 // Import Models
 import Invoice from './model/invoice';
 import Task from './model/task';
 // import Task from './model/task';
 import Xhr from './model/xhr';
-import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, removeTask, printTaxes } from './view/invoice';
+import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, removeTask, printTaxes, printTotals } from './view/invoice';
 
-// get Json data
-var xhr = new Xhr( { json: true } );
-xhr.send( 'data/content/skills.json' ).then( function (skills) {
-  for (var i = 0; i < skills[0].tools.length; i++) {
-    skills[0].tools[i];
-  }
-  // console.log(skills);
-});
-
-// Controller Interaccion entre -dom y la logica
-
+// Creamos la instancia de la clase Invoice
 let invoice = new Invoice();
-let iva = 21;
-let irpf= 15;
-let total = 0;
 
+// Variables globales
+let iva = 21,
+    irpf= 15,
+    total = 0;
+
+// Añadir tarea
 function addTask() {
   let taskValue = elInputTarea.value;
   let newTask = new Task(taskValue);
@@ -29,12 +23,15 @@ function addTask() {
   newTask.datos.precio = elInputPrecio.value * 1;
   newTask.datos.baseImp = elInputPrecio.value * elInputCantidad.value;
   total =+ newTask.datos.baseImp;
-  if (elSelectTaxes[0].selected === true) {}
+  if (elSelectTaxes[0].selected === true) {
+    let taxes = 56;
+    invoice.calcTaxes(taxes);
+  }
   printTask();
   console.log(newTask);
-  console.table(newTask.datos);
 }
 
+// Eliminar tarea
 function removeTarea() {
   let rowEl = document.querySelector('.invoice__row');
   let taskList = elMain.children;
@@ -44,17 +41,14 @@ function removeTarea() {
   console.log(taskList);
 }
 
-// Generate invoice
-function printInvoice (e) {
-  e.preventDefault;
-  console.log(invoice.tasks);
-  let value;
-  for (var i = 0; i < invoice.tasks.length; i++) {
-    value = invoice.tasks[i].datos.baseImp;
-    total + value;
-    console.log(total + value);
-  }
-  // elIva.value       =   factura.calcIva();
+// Generar factura
+function printInvoice() {
+  let arr = invoice.tasks;
+  let totalImps = 0;
+  arr.forEach(function(pilla){
+    totalImps += pilla.datos.baseImp;
+  });
+  invoice.totalImps(totalImps);
 }
 
 // Print screen to pdf
@@ -69,6 +63,20 @@ elBtnAddTask.addEventListener( 'click', addTask );
 elBtnDelTask.addEventListener( 'click', removeTarea );
 elBtnInvoice.addEventListener( 'click', printInvoice );
 
-console.clear();
 console.table(invoice.tasks);
+console.log(invoice.tasks.datos);
 console.log(invoice);
+
+
+
+
+
+
+// get Json data
+// var xhr = new Xhr( { json: true } );
+// xhr.send( 'data/content/skills.json' ).then( function (skills) {
+//   for (var i = 0; i < skills[0].tools.length; i++) {
+//     skills[0].tools[i];
+//   }
+//   // console.log(skills);
+// });

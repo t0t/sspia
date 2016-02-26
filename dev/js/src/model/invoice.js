@@ -2,11 +2,21 @@
 class Invoice {
   constructor() {
     this.tasks = [];
-    // this.iva = 21;
-    // this.irpf = 15;
   }
   addTask(task){
     this.tasks.push(task);
+  }
+  totalImps(total){
+    console.log(`
+      El total sin impuestos es:
+      ${total}
+      `);
+  }
+  calcTaxes(taxes) {
+    console.log(`
+      Los impuestos son:
+      ${taxes}
+      `);
   }
   // removeTask(i){
   //   this.tasks.splice(i,1);
