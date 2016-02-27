@@ -29,6 +29,7 @@ var invoice = new _invoice2.default();
 // Variables globales
 var iva = 21,
     irpf = 15,
+    baseImp = 0,
     total = 0;
 
 // Añadir tarea
@@ -36,16 +37,16 @@ function addTask() {
   var taskValue = _invoice3.elInputTarea.value;
   var newTask = new _task2.default(taskValue);
   invoice.addTask(newTask);
-  newTask.datos.cantidad = _invoice3.elInputCantidad.value * 1;
-  newTask.datos.precio = _invoice3.elInputPrecio.value * 1;
+  newTask.datos.cantidad = _invoice3.elInputCantidad.value;
+  newTask.datos.precio = _invoice3.elInputPrecio.value;
   newTask.datos.baseImp = _invoice3.elInputPrecio.value * _invoice3.elInputCantidad.value;
-  total = +newTask.datos.baseImp;
+  baseImp = +newTask.datos.baseImp;
+  total += baseImp;
   if (_invoice3.elSelectTaxes[0].selected === true) {
-    var taxes = 56;
-    invoice.calcTaxes(taxes);
+    newTask.is_taxed = true;
   }
-  (0, _invoice3.printTask)();
-  console.log(newTask);
+  console.log('\n    Base Imponible: ' + baseImp + '\n    Total acumulado: ' + total + '\n  ', newTask);
+  (0, _invoice3.printTask)(); // Imprime en DOM
 }
 
 // Eliminar tarea
@@ -63,7 +64,16 @@ function printInvoice() {
   var arr = invoice.tasks;
   var totalImps = 0;
   arr.forEach(function (pilla) {
-    totalImps += pilla.datos.baseImp;
+    if (pilla.is_taxed === true) {
+      totalImps += pilla.datos.baseImp;
+      var _iva = totalImps * 21 / 100;
+      var _irpf = totalImps * 15 / 100;
+      var totalTaxes = _iva - _irpf;
+      console.log('Impuestos: ' + totalTaxes);
+      totalImps += totalTaxes;
+    } else {
+      totalImps += pilla.datos.baseImp;
+    }
   });
   invoice.totalImps(totalImps);
 }
@@ -79,10 +89,6 @@ _invoice3.elBtnPrint.addEventListener('click', printPdf);
 _invoice3.elBtnAddTask.addEventListener('click', addTask);
 _invoice3.elBtnDelTask.addEventListener('click', removeTarea);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
-
-console.table(invoice.tasks);
-console.log(invoice.tasks.datos);
-console.log(invoice);
 
 // get Json data
 // var xhr = new Xhr( { json: true } );
@@ -171,7 +177,7 @@ var Task = function Task(name) {
 
   this.name = name;
   this.datos = {};
-  // this.is_taxed = false;
+  this.is_taxed = false;
 };
 
 exports.default = Task;
