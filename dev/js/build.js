@@ -15,9 +15,7 @@ var _html = require('./model/html');
 
 var _html2 = _interopRequireDefault(_html);
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : { default: obj };
-}
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Creamos la instancia de la clase Invoice
 // Controller Interaccion entre -dom y la logica
@@ -43,7 +41,7 @@ function addTask() {
   if (_invoice3.elSelectTaxes[0].selected === true) {
     newTask.is_taxed = true;
   }
-  console.log('\n    Base Imponible: ' + baseImp + '\n    Total acumulado: ' + total + '\n  ', newTask);
+  console.log(newTask);
   (0, _invoice3.printTask)(); // Imprime en DOM
   console.log(invoice.showTasks()); // Muestrame las tareas añadidas
 }
@@ -91,34 +89,7 @@ _invoice3.elBtnDelTask.addEventListener('click', removeTask);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
 },{"./model/html":2,"./model/invoice":3,"./model/task":4,"./view/invoice":5}],2:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-// MODEL Task
-
-var Element = function Element(element) {
-  _classCallCheck(this, Element);
-
-  this.name = element;
-}
-// createElement() {
-//   return this.name;
-// }
-;
-
-exports.default = Element;
-
-},{}],3:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -139,6 +110,46 @@ function _classCallCheck(instance, Constructor) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
+
+// MODEL Task
+
+var Element = function () {
+  function Element() {
+    var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+    var _ref$name = _ref.name;
+    var name = _ref$name === undefined ? 'div' : _ref$name;
+
+    _classCallCheck(this, Element);
+
+    this.name = name;
+  }
+
+  _createClass(Element, [{
+    key: 'createEl',
+    value: function createEl(clase, inner) {
+      var el = document.createElement(this.name);
+      el.className = clase;
+      el.innerHTML = inner;
+      return el;
+    }
+  }]);
+
+  return Element;
+}();
+
+exports.default = Element;
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // MODEL Invoice
 
@@ -173,11 +184,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // MODEL Task
 
@@ -230,12 +237,10 @@ function printTask() {
 }
 
 function printTotals(total, impuestos) {
-  // let divEl = new Element('div');
-  var newEl = document.createElement('div');
-  newEl.className = 'invoice__totals';
-  newEl.innerHTML = '\n    21% IVA - 15% IRPF: ' + impuestos + '\n    TOTAL FACTURA: ' + total + '\n  ';
-  console.log(newEl);
-  elMain.appendChild(newEl);
+  var div = new _html2.default();
+  var content = '\n    <div>21% IVA - 15% IRPF: ' + impuestos + '</div>\n    <div>TOTAL FACTURA: ' + total + '</div>\n  ';
+  var divC = div.createEl('invoice__totals', content);
+  elMain.appendChild(divC);
 }
 
 },{"../model/html":2}]},{},[1]);

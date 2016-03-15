@@ -1,10 +1,13 @@
 // MODEL Task
 class Element {
-  constructor( element ) {
-    this.name = element;
+  constructor( { name = 'div' } = {} ) {
+    this.name = name;
   }
-  // createElement() {
-  //   return this.name;
-  // }
+  createEl(clase,inner) {
+    let el = document.createElement(this.name);
+    el.className = clase;
+    el.innerHTML = inner;
+    return el;
+  }
 }
 export default Element;

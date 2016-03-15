@@ -33,9 +33,12 @@
 
 - [x] Añadir Tarea
 - [x] Eliminar Tarea
-- [x] Añadir Imprimir
+- [x] Añadir Botón Imprimir
 - [x] Select con impuestos o sin
 - [ ] Refactorizado
+- [ ] Eliminar correctamente tareas del DOM y del objeto Task
+- [ ] Eliminar más de dos decimales
+- [ ] Hacer datos del cliente editables
 
 ## Bugs
 

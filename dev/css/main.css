@@ -164,11 +164,9 @@ input[type="week"] {
   width: 100%;
   height: 50px;
   text-align: center;
-  border-top: 2px solid #f3f3f3;
+  border-bottom: 2px solid #f3f3f3;
   border-left: 2px solid #f3f3f3;
   border-right: 2px solid #f3f3f3; }
-  .invoice__row:last-child {
-    border-bottom: 2px solid #f3f3f3; }
 
 .invoice__id {
   display: -webkit-flex;

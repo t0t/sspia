@@ -28,13 +28,11 @@ export function printTask() {
 }
 
 export function printTotals( total, impuestos ) {
-  // let divEl = new Element('div');
-  let newEl = document.createElement('div');
-  newEl.className = 'invoice__totals';
-  newEl.innerHTML = `
-    21% IVA - 15% IRPF: ${impuestos}
-    TOTAL FACTURA: ${total}
+  let div = new Element();
+  let content = `
+    <div>21% IVA - 15% IRPF: ${impuestos}</div>
+    <div>TOTAL FACTURA: ${total}</div>
   `;
-  console.log(newEl);
-  elMain.appendChild(newEl);
+  let divC = div.createEl('invoice__totals',content);
+  elMain.appendChild(divC);
 }

@@ -17,12 +17,12 @@
   // margin-bottom: $padding-base / 2;
   text-align: center;
   // background-color: $color-white;
-  border-top: 2px solid $color-gray;
+  border-bottom: 2px solid $color-gray;
   border-left: 2px solid $color-gray;
   border-right: 2px solid $color-gray;
-  &:last-child {
-    border-bottom: 2px solid $color-gray;
-  }
+  // &:last-child {
+  //   border-bottom: 2px solid $color-gray;
+  // }
 }
 
 .invoice__id {
@@ -33,7 +33,7 @@
 }
 
 .invoice__totals {
-  margin-top: $padding-base / 2; 
+  margin-top: $padding-base / 2;
 }
 
 .invoice__results {
