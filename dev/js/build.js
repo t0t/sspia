@@ -15,7 +15,9 @@ var _html = require('./model/html');
 
 var _html2 = _interopRequireDefault(_html);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 // Creamos la instancia de la clase Invoice
 // Controller Interaccion entre -dom y la logica
@@ -41,9 +43,7 @@ function addTask() {
   if (_invoice3.elSelectTaxes[0].selected === true) {
     newTask.is_taxed = true;
   }
-  console.log(newTask);
   (0, _invoice3.printTask)(); // Imprime en DOM
-  console.log(invoice.showTasks()); // Muestrame las tareas añadidas
 }
 
 // Eliminar tarea
@@ -54,7 +54,6 @@ function removeTask() {
     taskList[i].remove();
     // this.tasks.splice(i,1);
   }
-  console.log(taskList);
 }
 
 // Generar factura
@@ -62,15 +61,15 @@ function printInvoice() {
   var arr = invoice.tasks;
   var totalImps = 0;
   var totalTaxes = 0;
-  arr.forEach(function (pilla) {
-    if (pilla.is_taxed === true) {
-      totalImps += pilla.datos.baseImp;
+  arr.forEach(function (item) {
+    if (item.is_taxed === true) {
+      totalImps += item.datos.baseImp;
       var _iva = totalImps * 21 / 100;
       var _irpf = totalImps * 15 / 100;
       totalTaxes = _iva - _irpf;
       totalImps += totalTaxes;
     } else {
-      totalImps += pilla.datos.baseImp;
+      totalImps += item.datos.baseImp;
     }
   });
   (0, _invoice3.printTotals)(totalImps, totalTaxes);
@@ -111,7 +110,7 @@ function _classCallCheck(instance, Constructor) {
   }
 }
 
-// MODEL Task
+// MODEL Element
 
 var Element = function () {
   function Element() {
@@ -124,6 +123,7 @@ var Element = function () {
 
     this.name = name;
   }
+  // Metodo para crear elemento html5 con la clase css y el contenido como parámetros
 
   _createClass(Element, [{
     key: 'createEl',
@@ -229,17 +229,22 @@ var elBtnPrint = exports.elBtnPrint = document.querySelector('.btn-print');
 
 function printTask() {
   var baseImp = elInputPrecio.value * elInputCantidad.value;
-  var outPut = document.createElement('div');
-  outPut.className = 'invoice__row';
-  outPut.innerHTML = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>=</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
-  elMain.appendChild(outPut);
-  // removeTask();
+  var div = new _html2.default();
+  var content = '\n    <p>' + elInputTarea.value + '</p>\n    <p>' + elInputCantidad.value + ' horas</p>\n    <p>x</p>\n    <p>' + elInputPrecio.value + '€</p>\n    <p>=</p>\n    <p data-valor="' + baseImp + '">' + baseImp + '€</p>\n  ';
+  var divC = div.createEl('invoice__row', content);
+  elMain.appendChild(divC);
 }
 
 function printTotals(total, impuestos) {
   var div = new _html2.default();
-  var content = '\n    <div>21% IVA - 15% IRPF: ' + impuestos + '</div>\n    <div>TOTAL FACTURA: ' + total + '</div>\n  ';
+  var content = '\n    <div>\n      21% IVA - 15% IRPF: ' + parseInt(impuestos) + '€\n    </div>\n    <div>\n      <p>TOTAL:</p>\n      <h1>' + parseInt(total) + ' €</h1>\n    </div>\n  ';
   var divC = div.createEl('invoice__totals', content);
+
+  var small = new _html2.default();
+  var contentS = '\n  <small>Numero de cuenta: 79382745 932847592 357</small>\n  ';
+  var smallC = small.createEl('invoice__bank', contentS);
+
+  divC.appendChild(smallC);
   elMain.appendChild(divC);
 }
 

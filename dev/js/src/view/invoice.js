@@ -13,9 +13,8 @@ export let elBtnPrint = document.querySelector( '.btn-print' );
 
 export function printTask() {
   let baseImp = elInputPrecio.value * elInputCantidad.value;
-  let outPut = document.createElement( 'div' );
-  outPut.className = 'invoice__row';
-  outPut.innerHTML = `
+  let div = new Element();
+  let content = `
     <p>${elInputTarea.value}</p>
     <p>${elInputCantidad.value} horas</p>
     <p>x</p>
@@ -23,16 +22,29 @@ export function printTask() {
     <p>=</p>
     <p data-valor="${baseImp}">${baseImp}€</p>
   `;
-  elMain.appendChild(outPut);
-  // removeTask();
+  let divC = div.createEl('invoice__row',content);
+  elMain.appendChild(divC);
 }
 
 export function printTotals( total, impuestos ) {
   let div = new Element();
   let content = `
-    <div>21% IVA - 15% IRPF: ${impuestos}</div>
-    <div>TOTAL FACTURA: ${total}</div>
+    <div>
+      21% IVA - 15% IRPF: ${parseInt(impuestos)}€
+    </div>
+    <div>
+      <p>TOTAL:</p>
+      <h1>${parseInt(total)} €</h1>
+    </div>
   `;
   let divC = div.createEl('invoice__totals',content);
+
+  let small = new Element();
+  let contentS = `
+  <small>Numero de cuenta: 79382745 932847592 357</small>
+  `;
+  let smallC = small.createEl('invoice__bank', contentS);
+
+  divC.appendChild(smallC);
   elMain.appendChild(divC);
 }
