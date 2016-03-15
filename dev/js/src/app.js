@@ -2,7 +2,7 @@
 // Import Models
 import Invoice from './model/invoice';
 import Task from './model/task';
-import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, removeTask, printTaxes, printTotals } from './view/invoice';
+import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, printTaxes, printTotals } from './view/invoice';
 import Element from './model/html';
 
 
@@ -37,7 +37,7 @@ function addTask() {
 }
 
 // Eliminar tarea
-function removeTarea() {
+function removeTask() {
   let rowEl = document.querySelector( '.invoice__row' );
   let taskList = elMain.children;
   for ( var i = 0; i < taskList.length; i++ ) {
@@ -63,7 +63,6 @@ function printInvoice() {
       totalImps += pilla.datos.baseImp;
     }
   });
-  invoice.totalImps( totalImps );
   printTotals(totalImps, totalTaxes);
 }
 
@@ -76,5 +75,5 @@ function printPdf(e) {
 // Los 4 eventos click
 elBtnPrint.addEventListener( 'click', printPdf );
 elBtnAddTask.addEventListener( 'click', addTask );
-elBtnDelTask.addEventListener( 'click', removeTarea );
+elBtnDelTask.addEventListener( 'click', removeTask );
 elBtnInvoice.addEventListener( 'click', printInvoice );

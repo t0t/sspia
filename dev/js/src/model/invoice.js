@@ -9,16 +9,5 @@ class Invoice {
   showTasks() {
     return this.tasks;
   }
-  totalImps( total ){
-    console.log(`
-      El total es: ${total}
-      `); 
-  }
-  calcTaxes( taxes ) {
-    console.log(`
-      Los impuestos son:
-      ${taxes}
-      `);
-  }
 }
 export default Invoice;

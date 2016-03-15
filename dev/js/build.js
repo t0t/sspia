@@ -49,7 +49,7 @@ function addTask() {
 }
 
 // Eliminar tarea
-function removeTarea() {
+function removeTask() {
   var rowEl = document.querySelector('.invoice__row');
   var taskList = _invoice3.elMain.children;
   for (var i = 0; i < taskList.length; i++) {
@@ -75,7 +75,6 @@ function printInvoice() {
       totalImps += pilla.datos.baseImp;
     }
   });
-  invoice.totalImps(totalImps);
   (0, _invoice3.printTotals)(totalImps, totalTaxes);
 }
 
@@ -88,7 +87,7 @@ function printPdf(e) {
 // Los 4 eventos click
 _invoice3.elBtnPrint.addEventListener('click', printPdf);
 _invoice3.elBtnAddTask.addEventListener('click', addTask);
-_invoice3.elBtnDelTask.addEventListener('click', removeTarea);
+_invoice3.elBtnDelTask.addEventListener('click', removeTask);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
 },{"./model/html":2,"./model/invoice":3,"./model/task":4,"./view/invoice":5}],2:[function(require,module,exports){
@@ -98,7 +97,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // MODEL Task
 
@@ -121,9 +124,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+  };
+}();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // MODEL Invoice
 
@@ -144,16 +159,6 @@ var Invoice = function () {
     value: function showTasks() {
       return this.tasks;
     }
-  }, {
-    key: "totalImps",
-    value: function totalImps(total) {
-      console.log("\n      El total es: " + total + "\n      ");
-    }
-  }, {
-    key: "calcTaxes",
-    value: function calcTaxes(taxes) {
-      console.log("\n      Los impuestos son:\n      " + taxes + "\n      ");
-    }
   }]);
 
   return Invoice;
@@ -168,7 +173,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
 // MODEL Task
 
