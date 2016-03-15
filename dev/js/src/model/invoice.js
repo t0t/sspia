@@ -1,25 +1,24 @@
-// MODEL models.js
+// MODEL Invoice
 class Invoice {
   constructor() {
     this.tasks = [];
   }
   addTask(task){
-    this.tasks.push(task);
+    this.tasks.push( task );
   }
-  totalImps(total){
+  showTasks() {
+    return this.tasks;
+  }
+  totalImps( total ){
     console.log(`
-      El total sin impuestos es:
-      ${total}
-      `);
+      El total es: ${total}
+      `); 
   }
-  calcTaxes(taxes) {
+  calcTaxes( taxes ) {
     console.log(`
       Los impuestos son:
       ${taxes}
       `);
   }
-  // removeTask(i){
-  //   this.tasks.splice(i,1);
-  // }
 }
 export default Invoice;

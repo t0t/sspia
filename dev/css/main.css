@@ -182,6 +182,9 @@ input[type="week"] {
   -ms-flex-pack: center;
   justify-content: center; }
 
+.invoice__totals {
+  margin-top: 12.5px; }
+
 .invoice__results {
   width: 75%;
   background-color: #f3f3f3; }

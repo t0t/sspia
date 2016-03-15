@@ -2,9 +2,9 @@
 // Import Models
 import Invoice from './model/invoice';
 import Task from './model/task';
-// import Task from './model/task';
-import Xhr from './model/xhr';
 import { elMain, elInputTarea, elInputCantidad, elInputPrecio, elSelectTaxes, elBtnPrint, elBtnAddTask, elBtnDelTask, elBtnInvoice, printTask, removeTask, printTaxes, printTotals } from './view/invoice';
+import Element from './model/html';
+
 
 // Creamos la instancia de la clase Invoice
 let invoice = new Invoice();
@@ -18,14 +18,14 @@ let iva = 21,
 // Añadir tarea
 function addTask() {
   let taskValue = elInputTarea.value;
-  let newTask = new Task(taskValue);
-  invoice.addTask(newTask);
+  let newTask = new Task( taskValue );
+  invoice.addTask( newTask );
   newTask.datos.cantidad = elInputCantidad.value;
   newTask.datos.precio = elInputPrecio.value;
   newTask.datos.baseImp = elInputPrecio.value * elInputCantidad.value;
   baseImp =+ newTask.datos.baseImp;
   total += baseImp;
-  if (elSelectTaxes[0].selected === true) {
+  if ( elSelectTaxes[0].selected === true ) {
     newTask.is_taxed = true;
   }
   console.log(`
@@ -33,14 +33,16 @@ function addTask() {
     Total acumulado: ${total}
   `, newTask);
   printTask(); // Imprime en DOM
+  console.log(invoice.showTasks()); // Muestrame las tareas añadidas
 }
 
 // Eliminar tarea
 function removeTarea() {
-  let rowEl = document.querySelector('.invoice__row');
+  let rowEl = document.querySelector( '.invoice__row' );
   let taskList = elMain.children;
-  for (var i = 0; i < taskList.length; i++) {
+  for ( var i = 0; i < taskList.length; i++ ) {
     taskList[i].remove();
+    // this.tasks.splice(i,1);
   }
   console.log(taskList);
 }
@@ -49,19 +51,20 @@ function removeTarea() {
 function printInvoice() {
   let arr = invoice.tasks;
   let totalImps = 0;
-  arr.forEach(function(pilla){
-    if (pilla.is_taxed === true) {
+  let totalTaxes = 0;
+  arr.forEach( function ( pilla ) {
+    if ( pilla.is_taxed === true ) {
       totalImps += pilla.datos.baseImp;
       let iva = (totalImps * 21) / 100;
       let irpf = (totalImps * 15) / 100;
-      let totalTaxes = iva - irpf;
-      console.log(`Impuestos: ${totalTaxes}`);
+      totalTaxes = iva - irpf;
       totalImps += totalTaxes;
     } else {
       totalImps += pilla.datos.baseImp;
     }
   });
-  invoice.totalImps(totalImps);
+  invoice.totalImps( totalImps );
+  printTotals(totalImps, totalTaxes);
 }
 
 // Print screen to pdf
@@ -75,16 +78,3 @@ elBtnPrint.addEventListener( 'click', printPdf );
 elBtnAddTask.addEventListener( 'click', addTask );
 elBtnDelTask.addEventListener( 'click', removeTarea );
 elBtnInvoice.addEventListener( 'click', printInvoice );
-
-
-
-
-
-// get Json data
-// var xhr = new Xhr( { json: true } );
-// xhr.send( 'data/content/skills.json' ).then( function (skills) {
-//   for (var i = 0; i < skills[0].tools.length; i++) {
-//     skills[0].tools[i];
-//   }
-//   // console.log(skills);
-// });

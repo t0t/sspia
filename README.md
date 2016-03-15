@@ -17,7 +17,7 @@
   - [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
   - JSON as "DB"
 
-## Development workflow
+## Local Environment
 
  * Atom
  * Git

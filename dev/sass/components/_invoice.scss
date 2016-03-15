@@ -32,6 +32,10 @@
   justify-content: center;
 }
 
+.invoice__totals {
+  margin-top: $padding-base / 2; 
+}
+
 .invoice__results {
   width: 75%;
   background-color: $color-gray;

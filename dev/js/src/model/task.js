@@ -1,6 +1,6 @@
-// Tareas
+// MODEL Task
 class Task {
-  constructor(name) {
+  constructor( name ) {
     this.name = name;
     this.datos = {};
     this.is_taxed = false;

@@ -1,3 +1,4 @@
+import Element from '../model/html';
 
 // IMPRIMIR DATOS EN EL DOM
 export let elMain = document.querySelector( '.invoiceApp' );
@@ -26,4 +27,14 @@ export function printTask() {
   // removeTask();
 }
 
-export function printTotals() {}
+export function printTotals( total, impuestos ) {
+  // let divEl = new Element('div');
+  let newEl = document.createElement('div');
+  newEl.className = 'invoice__totals';
+  newEl.innerHTML = `
+    21% IVA - 15% IRPF: ${impuestos}
+    TOTAL FACTURA: ${total}
+  `;
+  console.log(newEl);
+  elMain.appendChild(newEl);
+}

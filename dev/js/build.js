@@ -9,19 +9,17 @@ var _task = require('./model/task');
 
 var _task2 = _interopRequireDefault(_task);
 
-var _xhr = require('./model/xhr');
-
-var _xhr2 = _interopRequireDefault(_xhr);
-
 var _invoice3 = require('./view/invoice');
+
+var _html = require('./model/html');
+
+var _html2 = _interopRequireDefault(_html);
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };
 }
 
 // Creamos la instancia de la clase Invoice
-
-// import Task from './model/task';
 // Controller Interaccion entre -dom y la logica
 // Import Models
 var invoice = new _invoice2.default();
@@ -47,6 +45,7 @@ function addTask() {
   }
   console.log('\n    Base Imponible: ' + baseImp + '\n    Total acumulado: ' + total + '\n  ', newTask);
   (0, _invoice3.printTask)(); // Imprime en DOM
+  console.log(invoice.showTasks()); // Muestrame las tareas añadidas
 }
 
 // Eliminar tarea
@@ -55,6 +54,7 @@ function removeTarea() {
   var taskList = _invoice3.elMain.children;
   for (var i = 0; i < taskList.length; i++) {
     taskList[i].remove();
+    // this.tasks.splice(i,1);
   }
   console.log(taskList);
 }
@@ -63,19 +63,20 @@ function removeTarea() {
 function printInvoice() {
   var arr = invoice.tasks;
   var totalImps = 0;
+  var totalTaxes = 0;
   arr.forEach(function (pilla) {
     if (pilla.is_taxed === true) {
       totalImps += pilla.datos.baseImp;
       var _iva = totalImps * 21 / 100;
       var _irpf = totalImps * 15 / 100;
-      var totalTaxes = _iva - _irpf;
-      console.log('Impuestos: ' + totalTaxes);
+      totalTaxes = _iva - _irpf;
       totalImps += totalTaxes;
     } else {
       totalImps += pilla.datos.baseImp;
     }
   });
   invoice.totalImps(totalImps);
+  (0, _invoice3.printTotals)(totalImps, totalTaxes);
 }
 
 // Print screen to pdf
@@ -90,39 +91,41 @@ _invoice3.elBtnAddTask.addEventListener('click', addTask);
 _invoice3.elBtnDelTask.addEventListener('click', removeTarea);
 _invoice3.elBtnInvoice.addEventListener('click', printInvoice);
 
-// get Json data
-// var xhr = new Xhr( { json: true } );
-// xhr.send( 'data/content/skills.json' ).then( function (skills) {
-//   for (var i = 0; i < skills[0].tools.length; i++) {
-//     skills[0].tools[i];
-//   }
-//   // console.log(skills);
-// });
-
-},{"./model/invoice":2,"./model/task":3,"./model/xhr":4,"./view/invoice":5}],2:[function(require,module,exports){
+},{"./model/html":2,"./model/invoice":3,"./model/task":4,"./view/invoice":5}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-  };
-}();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
+// MODEL Task
+
+var Element = function Element(element) {
+  _classCallCheck(this, Element);
+
+  this.name = element;
 }
+// createElement() {
+//   return this.name;
+// }
+;
 
-// MODEL models.js
+exports.default = Element;
+
+},{}],3:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// MODEL Invoice
 
 var Invoice = function () {
   function Invoice() {
@@ -137,19 +140,20 @@ var Invoice = function () {
       this.tasks.push(task);
     }
   }, {
+    key: "showTasks",
+    value: function showTasks() {
+      return this.tasks;
+    }
+  }, {
     key: "totalImps",
     value: function totalImps(total) {
-      console.log("\n      El total sin impuestos es:\n      " + total + "\n      ");
+      console.log("\n      El total es: " + total + "\n      ");
     }
   }, {
     key: "calcTaxes",
     value: function calcTaxes(taxes) {
       console.log("\n      Los impuestos son:\n      " + taxes + "\n      ");
     }
-    // removeTask(i){
-    //   this.tasks.splice(i,1);
-    // }
-
   }]);
 
   return Invoice;
@@ -157,20 +161,16 @@ var Invoice = function () {
 
 exports.default = Invoice;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// Tareas
+// MODEL Task
 
 var Task = function Task(name) {
   _classCallCheck(this, Task);
@@ -182,181 +182,23 @@ var Task = function Task(name) {
 
 exports.default = Task;
 
-},{}],4:[function(require,module,exports){
-'use strict';
-
-var _typeof3 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-var _typeof2 = typeof Symbol === "function" && _typeof3(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof3(obj);
-};
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-};
-
-var _createClass = function () {
-    function defineProperties(target, props) {
-        for (var i = 0; i < props.length; i++) {
-            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
-        }
-    }return function (Constructor, protoProps, staticProps) {
-        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
-    };
-}();
-
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError("Cannot call a class as a function");
-    }
-}
-
-/**
- * XmlHttpRequest for you es6 project. Required features only.
- * Create xhr instance:
- * https://github.com/kysonic/xhr
- * var xhr = new Xhr(opts);
- * xhr.post('http://url.com',{data:123}).then(function(response){...},function(err){...});
- * Options:
- *    withCredentials - Adds cookie and auth data to request. CORS fetures.
- *    contentType - content type header,
- *    json - Handle response as JSON.
- */
-
-var Xhr = function () {
-    function Xhr(opts) {
-        _classCallCheck(this, Xhr);
-
-        this.events = {
-            READY_STATE_CHANGE: 'readystatechange',
-            LOAD_START: 'loadstart',
-            PROGRESS: 'progress',
-            ABORT: 'abort',
-            ERROR: 'error',
-            LOAD: 'load',
-            TIMEOUT: 'timeout',
-            LOAD_END: 'loadend'
-        };
-        this.opts = opts;
-    }
-
-    _createClass(Xhr, [{
-        key: 'send',
-        value: function send(url, method, data) {
-            var _this = this;
-
-            return new Promise(function (resolve, reject) {
-                var xhr = new XMLHttpRequest();
-                var m = method || 'GET';
-                xhr.open(m, url);
-                // Set headers
-                xhr.setRequestHeader('Content-Type', _this.opts.contentType || 'application/json');
-                // Custom
-                if (_this.opts.headers) {
-                    for (var name in _this.opts.headers) {
-                        var value = _this.opts.headers[name];
-                        xhr.setRequestHeader(name, value);
-                    }
-                }
-                // Transmit credentials
-                if (_this.opts.withCredentials) xhr.withCredentials = true;
-                data = data ? _this.parseData(data) : null;
-
-                xhr.addEventListener(_this.events.LOAD, function () {
-                    // ==0 for files.
-                    if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 0) {
-                        var responseText = '';
-                        if (xhr.responseText) {
-                            responseText = _this.opts.json ? JSON.parse(xhr.responseText) : xhr.responseText;
-                        }
-                        resolve(responseText, xhr);
-                    } else {
-                        reject(_this.reject(xhr));
-                    }
-                });
-                // Handle basic events
-                xhr.addEventListener(_this.events.ABORT, function () {
-                    return reject(_this.reject(xhr));
-                });
-                xhr.addEventListener(_this.events.ERROR, function () {
-                    return reject(_this.reject(xhr));
-                });
-                xhr.addEventListener(_this.events.TIMEOUT, function () {
-                    return reject(_this.reject(xhr));
-                });
-
-                data ? xhr.send(data) : xhr.send();
-            });
-        }
-    }, {
-        key: 'reject',
-        value: function reject(xhr) {
-            var responseText = '';
-            if (xhr.responseText) {
-                responseText = this.opts.json ? JSON.parse(xhr.responseText) : xhr.responseText;
-            }
-            return responseText;
-        }
-    }, {
-        key: 'parseData',
-        value: function parseData(data) {
-            // JSON
-            if (this.contentType == 'application/json') return JSON.stringify(data);
-            // Query string
-            var query = [];
-            if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)).toLowerCase() == 'string' || (typeof data === 'undefined' ? 'undefined' : _typeof(data)).toLowerCase() == 'number') {
-                query.push(data);
-            } else {
-                for (var key in data) {
-                    query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
-                }
-            }
-
-            return query.join('&');
-        }
-    }, {
-        key: 'get',
-        value: function get(url) {
-            return this.send(url);
-        }
-    }, {
-        key: 'post',
-        value: function post(url, data) {
-            return this.send(url, 'POST', data);
-        }
-    }, {
-        key: 'delete',
-        value: function _delete(url) {
-            return this.send(url, 'DELETE');
-        }
-    }, {
-        key: 'put',
-        value: function put(url, data) {
-            return this.send(url, 'PUT', data);
-        }
-    }]);
-
-    return Xhr;
-}();
-
-exports.default = Xhr;
-
 },{}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.elBtnPrint = exports.elBtnInvoice = exports.elBtnAddTask = exports.elBtnDelTask = exports.elInputPrecio = exports.elSelectTaxes = exports.elInputCantidad = exports.elInputTarea = exports.elMain = undefined;
 exports.printTask = printTask;
 exports.printTotals = printTotals;
+
+var _html = require('../model/html');
+
+var _html2 = _interopRequireDefault(_html);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 // IMPRIMIR DATOS EN EL DOM
 var elMain = exports.elMain = document.querySelector('.invoiceApp');
@@ -378,6 +220,13 @@ function printTask() {
   // removeTask();
 }
 
-function printTotals() {}
+function printTotals(total, impuestos) {
+  // let divEl = new Element('div');
+  var newEl = document.createElement('div');
+  newEl.className = 'invoice__totals';
+  newEl.innerHTML = '\n    21% IVA - 15% IRPF: ' + impuestos + '\n    TOTAL FACTURA: ' + total + '\n  ';
+  console.log(newEl);
+  elMain.appendChild(newEl);
+}
 
-},{}]},{},[1]);
+},{"../model/html":2}]},{},[1]);
