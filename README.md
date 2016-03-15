@@ -37,11 +37,8 @@
 - [x] Select con impuestos o sin
 - [ ] Refactorizado
 - [ ] Eliminar correctamente tareas del DOM y del objeto Task
-- [ ] Eliminar más de dos decimales
+- [x] Eliminar más de dos decimales
 - [ ] Hacer datos del cliente editables
-
-## Bugs
-
 - [ ] Btn eliminar: orden aparicion y que sea de uno en uno
 - [x] Calculo de impuestos automático
 - [x] Vista de generar Totales
