@@ -1,5 +1,5 @@
 # SSPIA
-**Static Single Page Invoice Application** that uses Web Standards.
+**Static Single Page Invoice Application** that uses Web Standards. [DEMO](http://t0t.github.io/sspia/)
 
 ![Screenshot](./screenshot.png)
 
@@ -15,7 +15,6 @@
     - Components
     - BEM
   - [The DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)
-  - JSON as "DB"
 
 ## Local Environment
 
@@ -36,12 +35,10 @@
 - [x] Eliminar Tarea
 - [x] Añadir Imprimir
 - [x] Select con impuestos o sin
-- [ ] JSON as Db
-- [ ] Añadir Rutas con page.js
 - [ ] Refactorizado
 
 ## Bugs
 
 - [ ] Btn eliminar: orden aparicion y que sea de uno en uno
-- Calculo de impuestos automático
-- Vista de generar Totales
+- [x] Calculo de impuestos automático
+- [x] Vista de generar Totales
